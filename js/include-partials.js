@@ -1,9 +1,18 @@
 // Load HTML partials (header/footer) into placeholders
 document.addEventListener('DOMContentLoaded', function(){
+  function resolvePartialUrl(url){
+    if(url.startsWith('/') || url.startsWith('http')) return url;
+    var path = window.location.pathname.replace(/\/$/, '');
+    var segments = path.split('/');
+    var depth = Math.max(0, segments.length - 2);
+    var prefix = depth ? Array(depth).fill('..').join('/') + '/' : '';
+    return prefix + url;
+  }
+
   function loadPartial(selector, url){
     var el = document.querySelector(selector);
     if(!el) return;
-    fetch(url).then(function(res){
+    fetch(resolvePartialUrl(url)).then(function(res){
       if(res.ok) return res.text();
       throw new Error('Failed to load ' + url);
     }).then(function(html){
@@ -17,6 +26,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  loadPartial('#site-header','/partials/header.html');
-  loadPartial('#site-footer','/partials/footer.html');
+  loadPartial('#site-header','partials/header.html');
+  loadPartial('#site-footer','partials/footer.html');
 });

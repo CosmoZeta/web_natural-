@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(prevBtn){ prevBtn.addEventListener('click', function(){ prevSlide(); restartCarousel(); }); }
 
   function startCarousel(){
-    carouselInterval = setInterval(nextSlide, 5000);
+    carouselInterval = setInterval(nextSlide, 2000);
   }
 
   function restartCarousel(){
