@@ -1,0 +1,284 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda Natural</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <button id="splash-close" class="splash-close" aria-label="Cerrar anuncio">×</button>
+      <img src="images/colagen_uno.jpg" alt="Anuncio Colagen Uno" class="splash-image">
+      <div class="splash-copy">
+        <h2>¡Oferta especial!</h2>
+        <p>Descubre nuestro Colagen Uno con descuento exclusivo.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-inner container">
+      <div class="hero-carousel">
+        <div class="carousel-slide active">
+          <img src="images/header_uno.jpg" alt="Header uno">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/header_dos.jpg" alt="Header dos">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/header_tres.jpg" alt="Header tres">
+        </div>
+
+        <button class="carousel-control prev" aria-label="Anterior">&#10094;</button>
+        <button class="carousel-control next" aria-label="Siguiente">&#10095;</button>
+
+        <div class="carousel-dots">
+          <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="hero-text-overlay">
+          <h1>10% DSCTO EN TODO</h1>
+          <p>Loncheritas y snacks saludables — promoción por tiempo limitado</p>
+          <a href="#products" class="btn-primary">VER PRODUCTOS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="products">
+    <div class="tabs">
+      <button class="tab-btn active" data-target="tab-best">LO MÁS VENDIDO</button>
+      <button class="tab-btn" data-target="tab-store">TIENDA</button>
+      <button class="tab-btn" data-target="tab-partner">COLABORA</button>
+    </div>
+
+    <section class="popular tab-panel active" id="tab-best">
+      <div class="popular-header">
+        <h2>LO MÁS VENDIDO</h2>
+        <a class="btn-cta" href="#">IR A LA TIENDA</a>
+      </div>
+
+      <div class="grid popular-grid">
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Pack Chocobolis Andinas">
+            </div>
+          <div class="card-body">
+            <h3>Pack Chocobolis Andinas 6und</h3>
+            <div class="price"><span class="old-price">S/22.00</span> <span class="sale-price">S/19.80</span></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Pack Quinua Crunch Cacao">
+            </div>
+          <div class="card-body">
+            <h3>Pack Quinua Crunch Cacao 10und</h3>
+            <div class="price"><span class="old-price">S/20.00</span> <span class="sale-price">S/18.00</span></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Pack Quinua Crunch Frutos Rojos">
+            </div>
+          <div class="card-body">
+            <h3>Pack Quinua Crunch Frutos Rojos 10und</h3>
+            <div class="price"><span class="old-price">S/20.00</span> <span class="sale-price">S/18.00</span></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Pack Infladito Camotito Zanahoria">
+            </div>
+          <div class="card-body">
+            <h3>Pack Infladito Camotito Zanahoria 10und</h3>
+            <div class="price"><span class="old-price">S/25.00</span> <span class="sale-price">S/22.50</span></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/colagen_plus.jpg" alt="Pack Infladito Queso">
+            </div>
+          <div class="card-body">
+            <h3>Pack Infladito Queso 10und</h3>
+            <div class="price"><span class="old-price">S/25.00</span> <span class="sale-price">S/22.50</span></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Quinua Crunch Frutos Rojos 15gr">
+            </div>
+          <div class="card-body">
+            <h3>Quinua Crunch Frutos Rojos 15gr</h3>
+            <div class="price"><span class="old-price">S/2.50</span> <span class="sale-price">S/2.20</span></div>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/colagen_plus.jpg" alt="Quinua Crunch Frutos Rojos 15gr">
+            </div>
+          <div class="card-body">
+            <h3>Quinua Crunch Frutos Rojos 15gr</h3>
+            <div class="price"><span class="old-price">S/2.50</span> <span class="sale-price">S/2.20</span></div>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Quinua Crunch Frutos Rojos 15gr">
+            </div>
+          <div class="card-body">
+            <h3>Quinua Crunch Frutos Rojos 15gr</h3>
+            <div class="price"><span class="old-price">S/2.50</span> <span class="sale-price">S/2.20</span></div>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/colagen_plus.jpg" alt="Quinua Crunch Frutos Rojos 15gr">
+            </div>
+          <div class="card-body">
+            <h3>Quinua Crunch Frutos Rojos 15gr</h3>
+            <div class="price"><span class="old-price">S/2.50</span> <span class="sale-price">S/2.20</span></div>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap">
+            <img src="images/header_uno.jpg" alt="Quinua Crunch Frutos Rojos 15gr">
+            </div>
+          <div class="card-body">
+            <h3>Quinua Crunch Frutos Rojos 15gr</h3>
+            <div class="price"><span class="old-price">S/2.50</span> <span class="sale-price">S/2.20</span></div>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- Sección TIENDA: aquí podrás añadir los productos en el futuro -->
+  <section class="store-section tab-panel" id="tab-store">
+    <div class="container">
+      <h2 class="store-title">TIENDA</h2>
+
+
+
+        <section class="products-grid">
+          <div class="grid store-grid">
+            <!-- ejemplos de producto; todos usarán colagen_plus + overlay citrato_magnesio -->
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/colagen_plus.jpg" alt="AVENA 100% INTEGRAL">
+                </div>
+              <div class="card-body">
+                <h3>AVENA 100% INTEGRAL 1KG</h3>
+                <div class="price">S/15.00</div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/header_uno.jpg" alt="CACAO ORGÁNICO">
+                </div>
+              <div class="card-body">
+                <h3>CACAO ORGÁNICO SIN AZÚCAR 200GR</h3>
+                <div class="price">S/22.00</div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/colagen_plus.jpg" alt="CAFÉ ECOLÓGICO">
+                </div>
+              <div class="card-body">
+                <h3>CAFÉ ECOLÓGICO 250GR</h3>
+                <div class="price">S/30.00</div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/colagen_plus.jpg" alt="CHÍA ECOLÓGICA">
+                </div>
+              <div class="card-body">
+                <h3>CHÍA ECOLÓGICA 400GR</h3>
+                <div class="price">S/25.00</div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/colagen_plus.jpg" alt="CHOCO MANÍ">
+                </div>
+              <div class="card-body">
+                <h3>CHOCO MANÍ SIN AZÚCAR 60GR</h3>
+                <div class="price">S/14.00</div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="img-wrap">
+                <img src="images/citrato_magnesio.jpg" alt="CHOCO PASAS">
+                </div>
+              <div class="card-body">
+                <h3>CHOCO PASAS SIN AZÚCAR 60GR</h3>
+                <div class="price">S/14.00</div>
+              </div>
+            </article>
+
+            <!-- puedes duplicar/añadir más productos aquí -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Colabora / Vende nuestros productos -->
+  <section class="partner-section tab-panel" id="tab-partner">
+    <div class="partner-bg"></div>
+    <div class="container partner-inner">
+      <div class="partner-left">
+        <a class="btn-primary center-cta" href="#products">VER PRODUCTOS</a>
+        <h2>¿TE GUSTARÍA VENDER<br> NUESTROS PRODUCTOS?</h2>
+        <p class="lead">Déjanos tus datos y te contactamos</p>
+      </div>
+
+      <div class="partner-right">
+        <form id="partner-form" class="partner-form">
+          <div class="row">
+            <input type="text" name="name" placeholder="Nombre" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+          </div>
+          <input type="text" name="phone" placeholder="Teléfono">
+          <textarea name="message" placeholder="¿Cómo podemos ayudarte?" rows="6"></textarea>
+          <button class="btn-black" type="submit">QUIERO MÁS INFORMACIÓN</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <button id="whatsapp-btn" aria-label="WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <div id="site-footer"></div>
+
+  <script src="js/include-partials.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
