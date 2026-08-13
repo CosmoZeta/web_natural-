@@ -1,28 +1,43 @@
-<div class="topbar">
-  <div class="container">
-    <div class="contact">📞 (+51) 967 678 197 &nbsp; ✉️ mrf.asesoresjuridicos@gmail.com</div>
-    <div class="actions">¡COMPRAR AHORA! &nbsp; 🛒 <span id="cart-count">0</span> elementos</div>
+<!-- TOPBAR (Franja verde superior) -->
+<div class="topbar" style="background: #8dc63f; color: #fff; padding: 8px 0; font-size: 13px;">
+  <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="contact" style="display: flex; gap: 15px; font-weight: 500;">
+      <span>📞 (+51) 967 678 197</span>
+      <span>✉️ contacto@delcampoatucasaperu.com</span>
+    </div>
+    <div class="actions" style="display: flex; gap: 15px; align-items: center; font-weight: 500;">
+      <span>¡COMPRAR AHORA!</span>
+      <span>🛒 <span id="cart-count">0</span> elementos</span>
+    </div>
   </div>
 </div>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="logo" title="Ir a inicio"> <img src="/images/logo_natural_blanco.png" alt="Del Campo a Tu Casa - Logo"> </a>
+<!-- HEADER PRINCIPAL -->
+<header class="site-header" style="background: #fff; border-bottom: 1px solid #eee;">
+  <div class="header-inner" style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 10px 20px;">
+    
+    <!-- LOGO CORREGIDO (Apunta al logo a color: logo_natural.png) -->
+    <a href="/index.html" class="logo" title="Ir a inicio"> 
+      <img src="/images/logo_natural_blanco.png" alt="Del Campo a Tu Casa - Logo" style="height: 65px; width: auto; display: block;"> 
+    </a>
+    
     <nav class="main-nav">
-      <ul>
-        <li><a href="/">INICIO</a></li>
-        <li><a href="/nosotros.html">NOSOTROS</a></li>
-        <li class="has-dropdown">
-          <a href="/pages/products.html">PRODUCTOS</a>
+      <ul style="display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; align-items: center; font-size: 14px; font-weight: 600;">
+        <li><a href="/index.html" style="text-decoration: none; color: #111;">INICIO</a></li>
+        <li><a href="/nosotros.html" style="text-decoration: none; color: #111;">NOSOTROS</a></li>
+        
+        <li class="has-dropdown" style="position: relative;">
+          <a href="/pages/products.html" style="text-decoration: none; color: #111;">PRODUCTOS ▾</a>
           <div class="dropdown-menu">
-            <a href="pages/products.html#alacena">ALACENA NATURAL</a>
-            <a href="pages/products.html#loncheritas">LONCHERITAS</a>
-            <a href="pages/products.html#lacteos">LÁCTEOS ARTESANALES</a>
-            <a href="pages/products.html#snacks">SNACKS NATURALES</a>
+            <a href="/pages/products.html#alacena">ALACENA NATURAL</a>
+            <a href="/pages/products.html#loncheritas">LONCHERITAS</a>
+            <a href="/pages/products.html#lacteos">LÁCTEOS ARTESANALES</a>
+            <a href="/pages/products.html#snacks">SNACKS NATURALES</a>
           </div>
         </li>
-        <li class="has-dropdown">
-          <a href="#">TE AYUDAMOS</a>
+        
+        <li class="has-dropdown" style="position: relative;">
+          <a href="#" style="text-decoration: none; color: #111;">TE AYUDAMOS ▾</a>
           <div class="dropdown-menu">
             <a href="#">PREGUNTAS FRECUENTES</a>
             <a href="#">CAMBIOS Y DEVOLUCIONES</a>
@@ -30,11 +45,13 @@
             <a href="#">CONTACTO RÁPIDO</a>
           </div>
         </li>
-        <li><a href="#">EMPRENDE</a></li>
-        <li><a href="#">BLOG</a></li>
-        <li><a href="#">CONTACTO</a></li>
+        
+        <li><a href="#" style="text-decoration: none; color: #111;">EMPRENDE</a></li>
+        <li><a href="/pages/blog.html" style="text-decoration: none; color: #111;">BLOG</a></li>
+        <li><a href="/pages/contacto.html" style="text-decoration: none; color: #111;">CONTACTO</a></li>
       </ul>
     </nav>
-    <div class="search">🔍</div>
+    
+    <div class="search" style="cursor: pointer; font-size: 18px; color: #111;">🔍</div>
   </div>
 </header>

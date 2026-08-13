@@ -4,53 +4,155 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Productos - Tienda Natural</title>
+  
+  <meta name="description" content="Explora nuestro catálogo completo de productos naturales, snacks y alacena. Todo de origen natural y sin químicos.">
   <link rel="stylesheet" href="../css/styles.css">
- </head>
+  
+  <!-- ESTO OCULTARÁ EL SPLASH SCREEN INMEDIATAMENTE EN ESTA PÁGINA -->
+  <style>
+    #splash-screen {
+      display: none !important;
+    }
+  </style>
+</head>
 <body>
   <div id="site-header"></div>
 
-  <main class="container">
-    <section class="store-section">
-      <h2 class="store-title">TIENDA</h2>
-      <section class="products-grid">
-        <div class="grid store-grid">
-          <article class="product-card">
-            <div class="img-wrap">
-              <img src="/images/colagen_producto1.png" alt="AVENA 100% INTEGRAL">
-              </div>
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <span style="color: var(--green); font-weight: bold;">Inicio</span> / <span>Tienda</span>
+    </div>
+  </div>
+
+  <main class="container" style="margin-bottom: 60px;">
+    <div class="store-layout">
+      
+      <aside class="sidebar">
+        <h4 style="text-transform: uppercase; font-size: 14px; margin-bottom: 16px;">Categorías</h4>
+        <ul class="filter-list">
+          <li>Snacks naturales <span class="badge">32</span></li>
+          <li>Alacena natural <span class="badge">20</span></li>
+          <li>Lácteos artesanales <span class="badge">0</span></li>
+          <li>Hogar <span class="badge">0</span></li>
+        </ul>
+
+        <h4 style="text-transform: uppercase; font-size: 14px; margin-top: 36px; margin-bottom: 16px;">Por tipo</h4>
+        <ul class="filter-list">
+          <li>Sin gluten <span class="badge">45</span></li>
+          <li>Vegano <span class="badge">43</span></li>
+          <li>Sin azúcar <span class="badge">42</span></li>
+          <li>Keto <span class="badge">10</span></li>
+          <li>Loncheritas saludables <span class="badge">6</span></li>
+        </ul>
+
+        <label style="display: flex; align-items: center; gap: 8px; margin-top: 24px; color: var(--muted); font-size: 14px; cursor: pointer;">
+          <input type="checkbox"> Ver productos en oferta
+        </label>
+      </aside>
+
+      <div class="products-grid">
+        <div class="store-controls">
+          <span style="font-size: 14px;">Mostrando 1–8 resultados</span>
+          <div class="sort">
+            <select id="sort-products" aria-label="Ordenar productos">
+              <option value="default">Orden predeterminado</option>
+              <option value="name-asc">Ordenar por nombre (A-Z)</option>
+              <option value="price-asc">Ordenar por precio: bajo a alto</option>
+              <option value="price-desc">Ordenar por precio: alto a bajo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid store-grid" id="store-grid-container">
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto1.png" alt="Avena 100% Integral 1kg" loading="lazy">
+            </figure>
             <div class="card-body">
-              <h3>COLÁGENO REJUVEGEN 500 </h3>
+              <h3>AVENA 100% INTEGRAL 1KG</h3>
               <div class="price">S/15.00</div>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="img-wrap">
-              <img src="/images/citrato_magnesio2.png" alt="CACAO ORGÁNICO">
-              </div>
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/citrato_magnesio2.png" alt="Cacao Orgánico Sin Azúcar 200gr" loading="lazy">
+            </figure>
             <div class="card-body">
-              <h3>CITRATO DE MAGNESIO 500 GR</h3>
+              <h3>CACAO ORGÁNICO SIN AZÚCAR 200GR</h3>
               <div class="price">S/22.00</div>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="img-wrap">
-              <img src="/images/cloruro_magnesio1.png" alt="CAFÉ ECOLÓGICO">
-              </div>
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/cloruro_magnesio1.png" alt="Café Ecológico 250gr" loading="lazy">
+            </figure>
             <div class="card-body">
-              <h3>CLORURO DE MAGNESIO 500 GR</h3>
+              <h3>CAFÉ ECOLÓGICO 250GR</h3>
               <div class="price">S/30.00</div>
             </div>
           </article>
 
-          <!-- Más productos... -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_plus.jpg" alt="Chía Ecológica 400gr" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>CHÍA ECOLÓGICA 400GR</h3>
+              <div class="price">S/25.00</div>
+            </div>
+          </article>
+
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_plus.jpg" alt="Choco Almendras Sin Azúcar" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>CHOCO ALMENDRAS SIN AZÚCAR</h3>
+              <div class="price">S/14.00</div>
+            </div>
+          </article>
+
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto2.png" alt="Choco Arándanos Sin Azúcar" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>CHOCO ARÁNDANOS SIN AZÚCAR</h3>
+              <div class="price">S/14.00</div>
+            </div>
+          </article>
+
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto3.png" alt="Choco Maní Sin Azúcar" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>CHOCO MANÍ SIN AZÚCAR</h3>
+              <div class="price">S/14.00</div>
+            </div>
+          </article>
+
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto4.png" alt="Choco Pasas Sin Azúcar" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>CHOCO PASAS SIN AZÚCAR</h3>
+              <div class="price">S/14.00</div>
+            </div>
+          </article>
         </div>
-      </section>
-    </section>
+      </div>
+    </div>
   </main>
 
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
   <div id="site-footer"></div>
+
   <script src="../js/include-partials.js" defer></script>
   <script src="../js/main.js" defer></script>
 </body>

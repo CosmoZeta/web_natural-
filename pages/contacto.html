@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto - Del Campo a Tu Casa</title>
+  
+  <meta name="description" content="Ponte en contacto con nosotros. Visítanos en Surco, Lima, llámanos o escríbenos para vender nuestros productos naturales.">
+  
+  <!-- Hojas de estilos con la ruta relativa correcta -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Aquí es donde el script inyectará automáticamente tu header.html -->
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <span style="color: var(--green); font-weight: bold;">Inicio</span> / <span>Contacto</span>
+    </div>
+  </div>
+
+  <main class="container" style="padding: 40px 0 80px;">
+    
+    <!-- BLOQUE SUPERIOR DE DATOS (Ubicación, Teléfono, Email) -->
+    <div class="contact-info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center; margin-bottom: 60px;">
+      
+      <div class="contact-card">
+        <div style="font-size: 32px; margin-bottom: 12px;">📍</div>
+        <h3 style="font-size: 16px; letter-spacing: 2px; margin-bottom: 8px;">UBICACIÓN</h3>
+        <p style="color: var(--muted); font-size: 14px; line-height: 1.5;">Jr. Las Gaviotas 1573, Sagitario. Surco<br>Lima, Perú.</p>
+      </div>
+
+      <div class="contact-card">
+        <div style="font-size: 32px; margin-bottom: 12px;">📱</div>
+        <h3 style="font-size: 16px; letter-spacing: 2px; margin-bottom: 8px;">TELÉFONO</h3>
+        <p style="color: var(--green); font-size: 15px; font-weight: 600; line-height: 1.5;">+51 951 379 798</p>
+      </div>
+
+      <div class="contact-card">
+        <div style="font-size: 32px; margin-bottom: 12px;">✉️</div>
+        <h3 style="font-size: 16px; letter-spacing: 2px; margin-bottom: 8px;">EMAIL</h3>
+        <p style="font-size: 14px; line-height: 1.5;">
+          <a href="mailto:Contacto@delcampoatucasaperu.com" style="color: var(--green); text-decoration: none; font-weight: 600;">Contacto@delcampoatucasaperu.com</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- BLOQUE INFERIOR: FORMULARIO Y TEXTO "¿TE GUSTARÍA VENDER..." -->
+    <div class="partner-section" style="margin-top: 0; padding: 0; background: transparent;">
+      <div class="partner-inner" style="align-items: start;">
+        
+        <div class="partner-left">
+          <h2 style="font-size: 42px; line-height: 1.1; margin-bottom: 16px; color: var(--dark);">¿TE GUSTARÍA VENDER<br>NUESTROS<br>PRODUCTOS?</h2>
+          <p class="lead" style="color: var(--muted); font-size: 15px;">Déjanos tus datos y te contactamos</p>
+        </div>
+
+        <div class="partner-right" style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+          <form id="contact-page-form" class="partner-form">
+            <div class="row" style="display: flex; gap: 15px; margin-bottom: 15px;">
+              <input type="text" name="name" placeholder="Nombre" required style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+              <input type="email" name="email" placeholder="Correo electrónico" required style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <input type="text" name="phone" placeholder="Teléfono" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <textarea name="message" placeholder="¿Cómo podemos ayudarte?" rows="5" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+            </div>
+            <button type="submit" style="background: var(--green); color: #fff; border: none; padding: 14px 24px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 14px; transition: background 0.2s;">QUIERO MÁS INFORMACIÓN</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Botones flotantes -->
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <!-- Aquí es donde el script inyectará automáticamente tu footer.html -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts con rutas relativas correctas para la carpeta pages -->
+  <script src="../js/include-partials.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
