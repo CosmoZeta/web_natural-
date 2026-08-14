@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preguntas Frecuentes - Del Campo a Tu Casa</title>
+  
+  <meta name="description" content="Encuentra respuestas a las preguntas más frecuentes sobre nuestra Stevia Andina, cereales y productos 100% naturales.">
+  <link rel="icon" type="image/png" href="../images/logo_natural.png">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    #splash-screen {
+      display: none !important;
+    }
+
+    /* Estilos específicos para la página de Preguntas Frecuentes */
+    .faq-wrapper {
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      padding: 0 15px;
+      position: relative;
+    }
+
+    /* Título principal en píldora verde */
+    .faq-hero-title {
+      text-align: center;
+      margin: 30px auto 45px;
+      position: relative;
+    }
+
+    .faq-pill-banner {
+      display: inline-block;
+      background: var(--green, #7ac142);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 14px 45px;
+      border-radius: 50px;
+      box-shadow: 0 8px 24px rgba(122, 193, 66, 0.35);
+      text-transform: uppercase;
+    }
+
+    /* Contenedor de cada bloque de pregunta */
+    .faq-block {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 35px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .faq-block:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+    }
+
+    /* Píldora de la pregunta */
+    .question-pill {
+      display: inline-block;
+      background: #7ac142;
+      color: #ffffff;
+      font-size: 19px;
+      font-weight: 700;
+      padding: 10px 24px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+      box-shadow: 0 4px 12px rgba(122, 193, 66, 0.2);
+    }
+
+    /* Diseño interno del contenido de respuesta */
+    .faq-content-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .faq-content-grid.reverse {
+      grid-template-columns: auto 1fr;
+    }
+
+    .faq-text {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #333;
+    }
+
+    .faq-text p {
+      margin-bottom: 14px;
+    }
+
+    .faq-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-text strong {
+      color: #111;
+    }
+
+    /* Contenedor de imágenes recicladas / personalizables */
+    .faq-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .faq-media-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #f1f8eb;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .faq-media-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .faq-media-card {
+      max-width: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fafafa;
+      padding: 10px;
+      border: 1px solid #eee;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .faq-media-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    /* Gráfico ilustrativo de glucosa / gota */
+    .illustration-glucose {
+      width: 170px;
+      height: 110px;
+    }
+
+    /* Decoraciones de hojas */
+    .leaf-deco {
+      position: absolute;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .faq-pill-banner {
+        font-size: 22px;
+        padding: 10px 25px;
+      }
+      .question-pill {
+        font-size: 16px;
+        padding: 8px 18px;
+      }
+      .faq-content-grid,
+      .faq-content-grid.reverse {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .faq-media {
+        order: -1;
+        margin-bottom: 10px;
+      }
+      .faq-block {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Encabezado inyectado automáticamente -->
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <span style="color: var(--green); font-weight: bold;">Inicio</span> / <span>Preguntas Frecuentes</span>
+    </div>
+  </div>
+
+  <main class="faq-wrapper">
+    
+    <!-- TÍTULO EN PÍLDORA VERDE -->
+    <div class="faq-hero-title">
+      <h1 class="faq-pill-banner">PREGUNTAS FRECUENTES</h1>
+    </div>
+
+    <!-- PREGUNTA 1: ¿La Stevia Andina es 100% natural? -->
+    <section class="faq-block">
+      <div class="question-pill">
+        ¿La Stevia Andina del campo a tu casa es 100% natural?
+      </div>
+      
+      <div class="faq-content-grid">
+        <div class="faq-text">
+          <p>
+            ✅ <strong>Sí, Nuestra Stevia Andina es 100% natural</strong>, elaborada en Cusco con stevia pura y un toque de yacón deshidratado, deliciosa y sin el sabor amargo típico de otras stevias.
+          </p>
+          <p>
+            ✨ <strong>No contiene químicos</strong> como sucralosa, eritritol, maltodextrina ni edulcorantes artificiales. Solo lo que el cuerpo reconoce como real.
+          </p>
+        </div>
+
+        <!-- IMAGEN REUTILIZADA: Producto Stevia / Yacón (Reemplazable en el futuro) -->
+        <div class="faq-media">
+          <div class="faq-media-card" title="Imagen de Stevia Andina">
+            <img src="../images/colagen_producto4.png" alt="Stevia Andina 100% Natural">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTA 2: ¿La Stevia Andina es apta para niños? -->
+    <section class="faq-block">
+      <div class="question-pill">
+        ¿La Stevia Andina es apta para niños? ¿Desde qué edad?
+      </div>
+
+      <div class="faq-content-grid reverse">
+        <!-- IMAGEN REUTILIZADA: Foto de niño / consumo saludable (Reemplazable en el futuro) -->
+        <div class="faq-media">
+          <div class="faq-media-circle" title="Apto para niños">
+            <img src="../images/header_uno.png" alt="Apto para niños desde el primer año">
+          </div>
+        </div>
+
+        <div class="faq-text">
+          <p>
+            👶 <strong>Sí, es apta para niños</strong> desde que comienzan a conocer el sabor dulce, incluso desde el primer año.
+          </p>
+          <p>
+            💡 <strong>No eleva la glucosa</strong> ni altera la microbiota intestinal, lo que la hace segura para una alimentación natural desde temprana edad.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTA 3: ¿La Stevia Andina es apta para diabéticos? -->
+    <section class="faq-block">
+      <div class="question-pill">
+        ¿La Stevia Andina es apta para diabéticos?
+      </div>
+
+      <div class="faq-content-grid">
+        <div class="faq-text">
+          <p>
+            💚 <strong>Sí. No eleva el índice glucémico</strong>, no estimula la insulina y está libre de químicos.
+          </p>
+          <p>
+            Es ideal para personas con diabetes o resistencia a la insulina que buscan disfrutar del sabor dulce sin poner en riesgo su salud.
+          </p>
+        </div>
+
+        <!-- ILUSTRACIÓN / GRÁFICO: Glucómetro y gota saludable (Estilo de la imagen de referencia) -->
+        <div class="faq-media">
+          <svg class="illustration-glucose" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gota amigable -->
+            <path d="M 45 40 C 45 20, 20 50, 20 75 C 20 95, 40 105, 55 105 C 70 105, 80 90, 80 75 C 80 50, 50 20, 45 40 Z" fill="#E63946"/>
+            <!-- Ojos gota -->
+            <circle cx="42" cy="72" r="3.5" fill="#fff"/>
+            <circle cx="58" cy="72" r="3.5" fill="#fff"/>
+            <circle cx="43" cy="72" r="1.5" fill="#111"/>
+            <circle cx="59" cy="72" r="1.5" fill="#111"/>
+            <path d="M 46 82 Q 50 86 54 82" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Glucómetro amigable -->
+            <rect x="90" y="35" width="65" height="75" rx="20" fill="#2A9D8F"/>
+            <rect x="98" y="45" width="49" height="32" rx="6" fill="#A7C957"/>
+            <text x="122" y="66" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#003049" text-anchor="middle">75</text>
+            <!-- Ojos glucómetro -->
+            <circle cx="112" cy="90" r="3" fill="#fff"/>
+            <circle cx="132" cy="90" r="3" fill="#fff"/>
+            <path d="M 118 97 Q 122 101 126 97" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Hoja decorativa -->
+            <path d="M 155 25 Q 175 15 170 40 Q 150 45 155 25 Z" fill="#7ac142"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTA 4: ¿Desde qué edad pueden consumir los cereales? -->
+    <section class="faq-block">
+      <div class="question-pill">
+        ¿Desde qué edad pueden consumir los cereales?
+      </div>
+
+      <div class="faq-content-grid reverse">
+        <!-- IMAGEN REUTILIZADA: Cereales Andinos (Reemplazable en el futuro) -->
+        <div class="faq-media">
+          <div class="faq-media-card" style="max-width: 140px;" title="Cereales Andinos">
+            <img src="../images/colagen_producto3.png" alt="Llantitas Andinas y Cereales Naturales">
+          </div>
+        </div>
+
+        <div class="faq-text">
+          <p>
+            🌾 <strong>Desde el primer año de vida</strong> pueden consumir nuestros cereales sin azúcar añadida, sin gluten y 100% veganos.
+          </p>
+          <p>
+            Opciones ideales para las loncheras: <em>Llantitas Andinas, Quinua Crunch, Avena Integral y Cacao Orgánico</em>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTA 5: Envíos y cobertura -->
+    <section class="faq-block">
+      <div class="question-pill">
+        ¿Cómo realizan los envíos y cuánto tardan en llegar?
+      </div>
+
+      <div class="faq-content-grid">
+        <div class="faq-text">
+          <p>
+            🚚 <strong>Envíos a todo el Perú:</strong> Realizamos entregas directas a toda Lima Metropolitana en un plazo de 24 a 48 horas hábiles.
+          </p>
+          <p>
+            📦 Para envíos a <strong>provincias</strong>, trabajamos con Olva Courier y Shalom con número de seguimiento para que recibas tu pedido seguro en la puerta de tu casa o agencia.
+          </p>
+        </div>
+
+        <div class="faq-media">
+          <div class="faq-media-circle" title="Envíos a todo el país">
+            <img src="../images/header_dos.png" alt="Envíos seguros a nivel nacional">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Botones flotantes -->
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <!-- Pie de página inyectado automáticamente -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="../js/include-partials.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

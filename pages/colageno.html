@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colágeno Hidrolizado - Tienda Natural</title>
+  
+  <meta name="description" content="Descubre nuestra línea exclusiva de colágeno hidrolizado natural con camu camu, magnesio y zinc para el cuidado de tu piel, articulaciones y salud.">
+  <link rel="icon" type="image/png" href="../images/logo_natural.png">
+  <link rel="stylesheet" href="../css/styles.css">
+  
+  <style>
+    #splash-screen {
+      display: none !important;
+    }
+    .filter-list a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      transition: color 0.2s;
+    }
+    .filter-list a:hover,
+    .filter-list li.active a {
+      color: var(--green);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <a href="../index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
+      <a href="products.html" style="color: var(--dark); text-decoration: none;">Tienda</a> / 
+      <span>Colágeno</span>
+    </div>
+  </div>
+
+  <main class="container" style="margin-bottom: 60px;">
+    <div class="store-layout">
+      
+      <aside class="sidebar">
+        <h4 style="text-transform: uppercase; font-size: 14px; margin-bottom: 16px;">Categorías</h4>
+        <ul class="filter-list">
+          <li><a href="products.html">Todos los productos <span class="badge">18</span></a></li>
+          <li class="active"><a href="colageno.html">Colágeno <span class="badge">6</span></a></li>
+          <li><a href="citrato-de-magnesio.html">Citrato de Magnesio <span class="badge">6</span></a></li>
+          <li><a href="cloruro-de-magnesio.html">Cloruro de Magnesio <span class="badge">6</span></a></li>
+        </ul>
+
+        <h4 style="text-transform: uppercase; font-size: 14px; margin-top: 36px; margin-bottom: 16px;">Beneficios</h4>
+        <ul class="filter-list">
+          <li>Piel firme y articulaciones <span class="badge">6</span></li>
+          <li>100% Puro y Natural <span class="badge">6</span></li>
+          <li>Sin Azúcar Añadida <span class="badge">6</span></li>
+        </ul>
+
+        <label style="display: flex; align-items: center; gap: 8px; margin-top: 24px; color: var(--muted); font-size: 14px; cursor: pointer;">
+          <input type="checkbox"> Ver productos en oferta
+        </label>
+      </aside>
+
+      <div class="products-grid">
+        <div class="store-controls">
+          <span style="font-size: 14px;">Mostrando 1–6 resultados de <strong>Colágeno</strong></span>
+          <div class="sort">
+            <select id="sort-products" aria-label="Ordenar productos">
+              <option value="default">Orden predeterminado</option>
+              <option value="name-asc">Ordenar por nombre (A-Z)</option>
+              <option value="price-asc">Ordenar por precio: bajo a alto</option>
+              <option value="price-desc">Ordenar por precio: alto a bajo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid store-grid" id="store-grid-container">
+          
+          <!-- PRODUCTO 1 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_plus.jpg" alt="Colágeno Hidrolizado Plus 500gr" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>COLÁGENO HIDROLIZADO PLUS 500GR</h3>
+              <div class="price">S/65.00</div>
+            </div>
+          </article>
+
+          <!-- PRODUCTO 2 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto1.png" alt="Colágeno con Camu Camu" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>COLÁGENO CON CAMU CAMU</h3>
+              <div class="price">S/55.00</div>
+            </div>
+          </article>
+
+          <!-- PRODUCTO 3 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto2.png" alt="Colágeno con Magnesio y Zinc" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>COLÁGENO CON MAGNESIO Y ZINC</h3>
+              <div class="price">S/60.00</div>
+            </div>
+          </article>
+
+          <!-- PRODUCTO 4 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto3.png" alt="Colágeno Premium Sabor Naranja" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>COLÁGENO PREMIUM SABOR NARANJA</h3>
+              <div class="price">S/58.00</div>
+            </div>
+          </article>
+
+          <!-- PRODUCTO 5 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_producto4.png" alt="Pack x3 Colágeno Plus Familiar" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>PACK X3 COLÁGENO PLUS FAMILIAR</h3>
+              <div class="price">S/160.00</div>
+            </div>
+          </article>
+
+          <!-- PRODUCTO 6 -->
+          <article class="product-card store-card">
+            <figure class="img-wrap" style="margin: 0;">
+              <img src="../images/colagen_uno.jpg" alt="Colágeno en Cápsulas 100 Unid" loading="lazy">
+            </figure>
+            <div class="card-body">
+              <h3>COLÁGENO EN CÁPSULAS 100 UNID</h3>
+              <div class="price">S/45.00</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <div id="site-footer"></div>
+
+  <script src="../js/include-partials.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

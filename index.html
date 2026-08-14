@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -79,7 +79,7 @@
   <main class="container" style="margin: 40px auto;">
     <h2 style="text-align: center; margin-bottom: 30px;">PRODUCTOS DESTACADOS</h2>
     
-    <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+    <div class="products-grid" id="store-grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
       
       <!-- PRODUCTO 1 -->
       <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
@@ -106,7 +106,7 @@
       <!-- PRODUCTO 3 -->
       <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/colagen_producto4.png" alt="Choco Pasas Sin Azúcar" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
           <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
@@ -114,86 +114,57 @@
         </div>
       </article>
 
+      <!-- PRODUCTO 4 -->
       <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/colagen_producto1.png" alt="Avena 100% Integral" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
+          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">AVENA 100% INTEGRAL 1KG</h3>
+          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/15.00</p>
         </div>
       </article>
 
+      <!-- PRODUCTO 5 -->
       <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/citrato_magnesio2.png" alt="Cacao Orgánico" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
+          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CACAO ORGÁNICO SIN AZÚCAR 200GR</h3>
+          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/22.00</p>
         </div>
       </article>
 
+      <!-- PRODUCTO 6 -->
       <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/cloruro_magnesio1.png" alt="Cloruro de Magnesio" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
+          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CLORURO DE MAGNESIO</h3>
+          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/35.00</p>
         </div>
       </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
+
+      <!-- PRODUCTO 7 -->
+      <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/citrato_magnesio.png" alt="Citrato de Magnesio" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
+          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CITRATO DE MAGNESIO</h3>
+          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/45.00</p>
         </div>
       </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
+
+      <!-- PRODUCTO 8 -->
+      <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
         <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="images/colagen_plus.jpg" alt="Choco Almendras" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </figure>
         <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
-        </div>
-      </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
-        <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-        </figure>
-        <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
-        </div>
-      </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
-        <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-        </figure>
-        <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
-        </div>
-      </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
-        <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-        </figure>
-        <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
-          <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
-        </div>
-      </article>
-            <article class="product-card small-product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
-        <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
-          <img src="images/colagen_producto4.png" alt="Choco Pasas" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-        </figure>
-        <div class="card-body" style="padding-top: 12px;">
-          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO PASAS SIN AZÚCAR</h3>
+          <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">CHOCO ALMENDRAS SIN AZÚCAR</h3>
           <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">S/14.00</p>
         </div>
       </article>
@@ -201,74 +172,14 @@
     </div>
   </main>
 
+  <!-- Botones flotantes -->
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
   <div id="site-footer"></div>
 
   <!-- SCRIPTS -->
   <script src="js/include-partials.js" defer></script>
-  
-  <script>
-    // Splash screen ultrarrápido y fluido
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        var splash = document.getElementById('splash-screen');
-        if(splash) {
-          splash.style.opacity = '0';
-          setTimeout(function() { splash.style.display = 'none'; }, 300);
-        }
-      }, 300);
-    });
-
-    // Lógica del Carrusel
-    document.addEventListener('DOMContentLoaded', function() {
-      let currentSlide = 0;
-      const slides = document.querySelectorAll('.carousel-slide');
-      let slideInterval;
-      const TIEMPO_CARRUSEL = 5000; 
-
-      function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-      }
-
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      }
-
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-      }
-
-      function startInterval() {
-        slideInterval = setInterval(nextSlide, TIEMPO_CARRUSEL);
-      }
-
-      function resetInterval() {
-        clearInterval(slideInterval);
-        startInterval();
-      }
-
-      if (slides.length > 0) {
-        startInterval();
-        let nextBtn = document.getElementById('nextBtn');
-        let prevBtn = document.getElementById('prevBtn');
-
-        if (nextBtn) {
-          nextBtn.addEventListener('click', function() {
-            nextSlide();
-            resetInterval();
-          });
-        }
-
-        if (prevBtn) {
-          prevBtn.addEventListener('click', function() {
-            prevSlide();
-            resetInterval();
-          });
-        }
-      }
-    });
-  </script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

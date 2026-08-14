@@ -393,9 +393,9 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
-  justify-items: stretch;
+  justify-content: center; /* Centra los items si no llenan la fila */
 }
 
 .popular-grid {
@@ -410,9 +410,11 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center; /* Centra contenido interno */
   justify-content: space-between;
   width: 100%;
+  max-width: 280px; /* Evita que crezcan demasiado */
+  margin: 0 auto; /* Centra la tarjeta en su celda */
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -826,14 +828,58 @@ body {
 }
 
 @media (max-width: 700px) {
-  body { padding-top: 220px; } 
-  .site-header { position: sticky; top: var(--topbar-height); }
-  .header-inner { flex-wrap: wrap; justify-content: center; gap: 12px; padding: 12px; }
-  .logo { flex: 1; justify-content: center; margin: 0; }
-  .logo img { height: 60px; }
-  .main-nav { width: 100%; }
-  .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .search { position: absolute; right: 20px; top: 20px; }
+  body { padding-top: 130px; } 
+  
+  /* Mantener topbar y header fijos */
+  .topbar { position: fixed; top: 0; }
+  .site-header { position: fixed; top: var(--topbar-height); }
+
+  .topbar .contact { display: none; } 
+  .topbar .container { justify-content: center; }
+
+  .header-inner { 
+    flex-direction: column; 
+    gap: 5px; 
+    padding: 5px 10px; 
+  }
+
+  .logo img { height: 45px; }
+
+  /* Navegación en una sola línea con scroll horizontal */
+  .main-nav {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px;
+  }
+  
+  .main-nav ul { 
+    display: flex;
+    flex-wrap: nowrap; /* No permite que bajen a otra línea */
+    justify-content: flex-start; 
+    gap: 15px; 
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .main-nav li {
+    flex: 0 0 auto; /* Evita que los items se encojan */
+  }
+
+  .search { display: none; }
+
+  /* Ajuste de carrusel para móvil */
+  .hero-carousel {
+    height: 250px !important; /* Altura más cómoda para móvil */
+  }
+  
+  .hero-content h1 {
+    font-size: 24px !important;
+  }
+  
+  .hero-content p {
+    font-size: 14px !important;
+  }
 }
 
 @media (max-width: 600px) {

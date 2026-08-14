@@ -24,7 +24,7 @@
 <header class="site-header" style="background: #fff; border-bottom: 1px solid #eee;">
   <div class="header-inner" style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 10px 20px;">
     
-    <!-- LOGO CORREGIDO (Apunta al logo a color: logo_natural.png) -->
+    <!-- LOGO HEADER: logo_natural_blanco.png -->
     <a href="/index.html" class="logo" title="Ir a inicio"> 
       <img src="/images/logo_natural_blanco.png" alt="Del Campo a Tu Casa - Logo" style="height: 65px; width: auto; display: block;"> 
     </a>
@@ -37,17 +37,16 @@
         <li class="has-dropdown" style="position: relative;">
           <a href="/pages/products.html" style="text-decoration: none; color: #111;">PRODUCTOS ▾</a>
           <div class="dropdown-menu">
-            <a href="/pages/products.html#alacena">ALACENA NATURAL</a>
-            <a href="/pages/products.html#loncheritas">LONCHERITAS</a>
-            <a href="/pages/products.html#lacteos">LÁCTEOS ARTESANALES</a>
-            <a href="/pages/products.html#snacks">SNACKS NATURALES</a>
+            <a href="/pages/colageno.html">COLÁGENO</a>
+            <a href="/pages/citrato-de-magnesio.html">CITRATO DE MAGNESIO</a>
+            <a href="/pages/cloruro-de-magnesio.html">CLORURO DE MAGNESIO</a>
           </div>
         </li>
         
         <li class="has-dropdown" style="position: relative;">
           <a href="#" style="text-decoration: none; color: #111;">TE AYUDAMOS ▾</a>
           <div class="dropdown-menu">
-            <a href="#">PREGUNTAS FRECUENTES</a>
+            <a href="/pages/preguntas-frecuentes.html">PREGUNTAS FRECUENTES</a>
             <a href="#">CAMBIOS Y DEVOLUCIONES</a>
             <a href="#">PUNTOS DE VENTA</a>
             <a href="#">CONTACTO RÁPIDO</a>
@@ -60,6 +59,9 @@
       </ul>
     </nav>
     
-    <div class="search" style="cursor: pointer; font-size: 18px; color: #111;">🔍</div>
+        <div class="search-container" style="display: flex; align-items: center; gap: 10px; position: relative;">
+      <input type="text" id="header-search-input" placeholder="Buscar productos..." style="display: none; padding: 6px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 14px; width: 200px;">
+      <div class="search" id="search-trigger" style="cursor: pointer; font-size: 18px; color: #111;">🔍</div>
+    </div>
   </div>
 </header>

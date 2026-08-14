@@ -15,10 +15,10 @@ const CONFIG = Object.freeze({
     baseUrl: 'https://wa.me/'
   },
   carousel: {
-    autoPlayIntervalMs: 2000
+    autoPlayIntervalMs: 4500
   },
   splash: {
-    autoCloseDelayMs: 6000
+    autoCloseDelayMs: 400
   },
   images: {
     defaultFallback: 'images/colagen_plus.jpg'
@@ -27,16 +27,20 @@ const CONFIG = Object.freeze({
     whatsappBtn: '#whatsapp-btn',
     cartBtn: '#cart-btn',
     cartBubble: '#cart-bubble',
-    partnerForm: '#partner-form',
+    partnerForm: '#partner-form, #contact-page-form',
     tabButtons: '.tab-btn',
     tabPanels: '.tab-panel',
     carouselSlides: '.carousel-slide',
     carouselDots: '.carousel-dot',
-    carouselPrev: '.carousel-control.prev',
-    carouselNext: '.carousel-control.next',
+    carouselPrev: '#prevBtn, .carousel-control.prev',
+    carouselNext: '#nextBtn, .carousel-control.next',
     productCardImages: '.product-card img',
     splashScreen: '#splash-screen',
-    splashClose: '#splash-close'
+    splashClose: '#splash-close',
+    sortSelect: '#sort-products',
+    productsGrid: '#store-grid-container',
+    searchInput: '#header-search-input',
+    searchTrigger: '#search-trigger'
   }
 });
 
@@ -56,6 +60,11 @@ class DOMUtils {
     if (element) {
       element.addEventListener(event, handler);
     }
+  }
+
+  static normalizeText(str) {
+    if (!str) return '';
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
 }
 
@@ -266,6 +275,104 @@ class ImageFallbackHandler {
 }
 
 /**
+ * Single Responsibility: Handles product search logic across the store.
+ */
+class SearchController {
+  static isInitialized = false;
+
+  init(triggerSel, inputSel, gridSel) {
+    if (SearchController.isInitialized) return;
+    SearchController.isInitialized = true;
+
+    this.triggerSel = triggerSel;
+    this.inputSel = inputSel;
+    this.gridSel = gridSel;
+
+    // Toggle input visibility on search trigger click (event delegation for async partials)
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest(this.triggerSel);
+      const input = DOMUtils.select(this.inputSel);
+
+      if (trigger && input) {
+        e.stopPropagation();
+        const isHidden = getComputedStyle(input).display === 'none';
+        input.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) input.focus();
+      } else if (input && input.style.display !== 'none' && !input.contains(e.target)) {
+        input.style.display = 'none';
+      }
+    });
+
+    // Real-time search filter on input event
+    document.addEventListener('input', (e) => {
+      if (e.target.matches(this.inputSel)) {
+        this.performSearch(e.target);
+      }
+    });
+  }
+
+  performSearch(inputElement) {
+    const grid = DOMUtils.select(this.gridSel);
+    if (!grid) return; // Search only works if on a page with a product grid
+
+    const searchTerm = DOMUtils.normalizeText(inputElement.value);
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+    cards.forEach(card => {
+      const titleEl = card.querySelector('h3');
+      if (!titleEl) return;
+      const productName = DOMUtils.normalizeText(titleEl.textContent);
+      const isMatch = productName.includes(searchTerm);
+      card.style.display = isMatch ? '' : 'none';
+    });
+  }
+}
+
+/**
+ * Single Responsibility: Handles product sorting logic in the store grid.
+ */
+class ProductSorter {
+  init(selectSelector, gridSelector) {
+    this.select = DOMUtils.select(selectSelector);
+    this.grid = DOMUtils.select(gridSelector);
+
+    if (!this.select || !this.grid) return;
+
+    DOMUtils.addSafeEventListener(this.select, 'change', () => this.sort());
+  }
+
+  sort() {
+    const value = this.select.value;
+    const cards = Array.from(this.grid.querySelectorAll('.product-card'));
+
+    const sortedCards = cards.sort((a, b) => {
+      if (value === 'name-asc') {
+        const nameA = a.querySelector('h3').textContent.trim().toLowerCase();
+        const nameB = b.querySelector('h3').textContent.trim().toLowerCase();
+        return nameA.localeCompare(nameB);
+      }
+
+      if (value === 'price-asc' || value === 'price-desc') {
+        const priceA = this.parsePrice(a.querySelector('.price').textContent);
+        const priceB = this.parsePrice(b.querySelector('.price').textContent);
+        return value === 'price-asc' ? priceA - priceB : priceB - priceA;
+      }
+
+      return 0; // Default or unsorted
+    });
+
+    // Re-append sorted elements
+    this.grid.innerHTML = '';
+    sortedCards.forEach(card => this.grid.appendChild(card));
+  }
+
+  parsePrice(priceString) {
+    // Extracts numeric value from strings like "S/30.00"
+    return parseFloat(priceString.replace(/[^\d.]/g, '')) || 0;
+  }
+}
+
+/**
  * Single Responsibility: Handles Splash Screen popup modal display & auto-hide timer.
  */
 class SplashScreenController {
@@ -294,7 +401,10 @@ class SplashScreenController {
 
   hide() {
     if (this.screen && this.screen.style.display !== 'none') {
-      this.screen.style.display = 'none';
+      this.screen.style.opacity = '0';
+      setTimeout(() => {
+        if (this.screen) this.screen.style.display = 'none';
+      }, 300);
       if (this.autoCloseTimer) {
         clearTimeout(this.autoCloseTimer);
         this.autoCloseTimer = null;
@@ -328,8 +438,17 @@ class App {
 
     new ImageFallbackHandler().init(CONFIG.selectors.productCardImages);
     new SplashScreenController().init(CONFIG.selectors.splashScreen, CONFIG.selectors.splashClose);
+    new ProductSorter().init(CONFIG.selectors.sortSelect, CONFIG.selectors.productsGrid);
+    new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
   }
 }
+
+// Escuchar la carga de los partials para reinicializar componentes que dependen del Header
+document.addEventListener('partialLoaded', (e) => {
+  if (e.detail.selector === '#site-header') {
+    new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
+  }
+});
 
 // Self-initialization on DOMReady
 if (document.readyState === 'loading') {
