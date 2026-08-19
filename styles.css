@@ -70,6 +70,14 @@ body {
 /* =========================================
    TOPBAR Y HEADER
    ========================================= */
+#site-header {
+  position: sticky;
+  top: -42px;
+  z-index: 1400;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
 .topbar, .site-topbar {
   width: 100%;
   background: var(--green);
@@ -89,6 +97,7 @@ body {
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #eee;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .header-inner {
@@ -798,24 +807,37 @@ body.page-scrolled .logo img {
 
 .footer-top { padding: 28px 0 0; }
 .social-row { display: flex; justify-content: center; }
-.social-list { list-style: none; display: flex; gap: 18px; }
-.social {
+.social-list { 
+  list-style: none; 
+  display: flex; 
+  gap: 20px; 
+  align-items: center; 
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.social-icon-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: #2b2b2b;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  transition: transform 0.2s;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.social:hover { transform: scale(1.1); }
-.social.fb { background: #3b5998; }
-.social.ig { background: #e1306c; }
-.social.partners { background: #f2c94c; color: #111; }
+.social-icon-link:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 25px rgba(141, 198, 63, 0.45);
+}
+.social-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .footer-inner {
   display: grid;
@@ -841,82 +863,246 @@ body.page-scrolled .logo img {
 .copyright { color: #999; font-size: 13px; }
 
 /* =========================================
-   MEDIA QUERIES GLOBALES
+   MEDIA QUERIES GLOBALES (RESPONSIVE PROFESIONAL)
    ========================================= */
-@media (min-width: 768px) {
-  .about-section { padding: 100px 0 60px; }
-  .about-grid { grid-template-columns: 1fr 1fr; }
-  .values-grid, .image-row { grid-template-columns: repeat(3, 1fr); }
-}
 
-@media (max-width: 1000px) {
-  .sidebar { display: none; }
-}
-
-@media (max-width: 900px) {
-  .hero-inner { flex-direction: column; text-align: center; padding: 18px; }
-  .hero-carousel { min-height: 320px; }
-  .carousel-slide { border-radius: 16px; }
-  .partner-inner { grid-template-columns: 1fr; }
-  .partner-right { order: 2; }
-  .partner-left { order: 1; }
-  .footer-inner { grid-template-columns: 1fr; text-align: center; }
-  .footer-about .footer-logo { margin: 0 auto 12px; }
-}
-
-@media (max-width: 700px) {
-  body { padding-top: 0; } 
-  
-  .topbar .contact, .site-topbar .topbar-contact { display: none; } 
-  .topbar .container, .site-topbar .topbar-container { justify-content: center; }
-
-  .header-inner { 
-    flex-direction: column; 
-    gap: 5px; 
-    padding: 5px 10px; 
+/* Tablets en horizontal y escritorios pequeños */
+@media (max-width: 1024px) {
+  .store-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 25px;
   }
-
-  .logo img { height: 45px; }
-
-  /* Navegación en una sola línea con scroll horizontal */
-  .main-nav {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 5px;
+  .catalog-grid,
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
   }
-  
-  .main-nav ul { 
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Tablets en vertical y Celulares (<= 768px) */
+@media (max-width: 768px) {
+  /* Layout de Tienda en Columna */
+  .store-layout {
     display: flex;
-    flex-wrap: nowrap; /* No permite que bajen a otra línea */
-    justify-content: flex-start; 
-    gap: 15px; 
-    padding: 0 10px;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .sidebar-filter-box {
+    padding: 18px;
+  }
+
+  .filter-pills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-pill-item a {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* Cuadrícula de Productos en 2 Columnas Móvil */
+  .catalog-grid,
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .store-product-card,
+  .product-card {
+    border-radius: 14px;
+  }
+
+  .card-image-box,
+  .product-card .img-wrap {
+    aspect-ratio: 1/1;
+  }
+
+  .card-title,
+  .product-card h3 {
+    font-size: 13px !important;
+    min-height: 36px;
+    margin-bottom: 6px;
+  }
+
+  .card-price,
+  .product-card .price {
+    font-size: 16px !important;
+  }
+
+  .card-btn-view,
+  .btn-card-view {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .card-promo-badge,
+  .card-badge {
+    font-size: 9.5px;
+    padding: 3px 8px;
+  }
+
+  /* Carrusel Hero Móvil */
+  .hero-carousel {
+    height: clamp(340px, 48vh, 440px) !important;
+  }
+
+  .hero-content {
+    padding: 0 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 10px;
+  }
+
+  .hero-content p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    padding: 10px 18px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .carousel-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+  #prevBtn { left: 10px; }
+  #nextBtn { right: 10px; }
+
+  /* Cinta de Confianza 2x2 */
+  .trust-ribbon {
+    padding: 18px 0;
+  }
+
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 14px;
+  }
+
+  .trust-card {
+    gap: 10px;
+  }
+
+  .trust-icon-box {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .trust-title {
+    font-size: 13px;
+  }
+
+  .trust-desc {
     font-size: 11px;
   }
 
-  .main-nav li {
-    flex: 0 0 auto; /* Evita que los items se encojan */
+  /* Especialidades por Categoría */
+  .category-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
-  .search { display: none; }
+  .category-box {
+    padding: 14px;
+  }
 
-  /* Ajuste de carrusel para móvil */
-  .hero-carousel {
-    height: 250px !important; /* Altura más cómoda para móvil */
+  /* Testimonios y Banner Mayorista */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
-  
-  .hero-content h1 {
-    font-size: 24px !important;
+
+  .home-wholesale-banner {
+    padding: 32px 20px;
+    margin: 0 14px 40px;
+    border-radius: 18px;
   }
-  
-  .hero-content p {
-    font-size: 14px !important;
+
+  .home-wholesale-banner h2 {
+    font-size: 22px;
+  }
+
+  .home-wholesale-banner p {
+    font-size: 13.5px;
+  }
+
+  /* Footer en Móvil */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 28px;
+    padding: 36px 0;
+  }
+
+  .footer-about .footer-logo {
+    margin: 0 auto 14px;
+  }
+
+  /* Títulos de sección en píldora */
+  .section-pill-title {
+    font-size: 20px !important;
+    padding: 9px 28px !important;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+    padding: 0 10px;
   }
 }
 
-@media (max-width: 600px) {
-  .splash-content { border-radius: 16px; }
-  .splash-copy { padding: 18px; }
-  .splash-copy h2 { font-size: 22px; }
+/* Celulares Pequeños (<= 480px) */
+@media (max-width: 480px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .catalog-grid,
+  .products-grid {
+    gap: 10px !important;
+  }
+
+  #whatsapp-btn {
+    bottom: 16px;
+    left: 14px;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  #cart-btn {
+    bottom: 16px;
+    right: 14px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
 }

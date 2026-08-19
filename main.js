@@ -532,6 +532,68 @@ class HeaderScrollController {
   }
 }
 
+/**
+ * Single Responsibility: Manages mobile navigation drawer and accordion submenus.
+ */
+class MobileMenuController {
+  static isInitialized = false;
+
+  init() {
+    if (MobileMenuController.isInitialized) return;
+    MobileMenuController.isInitialized = true;
+
+    // Use event delegation for async partial loaded elements
+    document.addEventListener('click', (e) => {
+      // Toggle button
+      if (e.target.closest('#mobile-menu-toggle')) {
+        this.openDrawer();
+      }
+
+      // Close button or overlay
+      if (e.target.closest('#mobile-drawer-close') || e.target.matches('#mobile-drawer-overlay')) {
+        this.closeDrawer();
+      }
+
+      // Drawer submenus toggle
+      const subToggle = e.target.closest('.drawer-toggle');
+      if (subToggle) {
+        e.preventDefault();
+        const targetId = subToggle.getAttribute('data-target');
+        const submenu = document.getElementById(targetId);
+        if (submenu) {
+          const isOpen = submenu.classList.contains('open');
+          submenu.classList.toggle('open', !isOpen);
+          const arrow = subToggle.querySelector('.chevron-arrow');
+          if (arrow) {
+            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+          }
+        }
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.closeDrawer();
+    });
+  }
+
+  openDrawer() {
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const overlay = document.getElementById('mobile-drawer-overlay');
+    if (drawer) drawer.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeDrawer() {
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const overlay = document.getElementById('mobile-drawer-overlay');
+    if (drawer) drawer.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
 // ==========================================
 // 4. APPLICATION BOOTSTRAP (Mediator / Facade)
 // ==========================================
@@ -557,6 +619,7 @@ class App {
     new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
     new BenefitFilterController().init(CONFIG.selectors.productsGrid);
     new HeaderScrollController().init();
+    new MobileMenuController().init();
   }
 }
 
@@ -565,6 +628,7 @@ document.addEventListener('partialLoaded', (e) => {
   if (e.detail.selector === '#site-header') {
     new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
     new HeaderScrollController().init();
+    new MobileMenuController().init();
   }
 });
 

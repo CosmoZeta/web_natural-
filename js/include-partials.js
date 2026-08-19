@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', function(){
   var ALLOWED_PARTIALS = ['partials/header.html', 'partials/footer.html'];
 
   function getDepthPrefix() {
-    var path = window.location.pathname.replace(/\/$/, '');
-    var segments = path.split('/').filter(Boolean);
-    var isSubdir = segments.length >= 2 && segments[segments.length - 2] === 'pages';
-    return isSubdir ? '../' : '';
+    var path = window.location.pathname.toLowerCase();
+    if (path.indexOf('/pages/') !== -1 || path.indexOf('\\pages\\') !== -1) {
+      return '../';
+    }
+    return '';
   }
 
   function resolvePartialUrl(url){

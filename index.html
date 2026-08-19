@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' data: blob: https:; connect-src 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Tienda Natural - Del Campo a Tu Casa | Suplementos y Alimentos 100% Naturales</title>
@@ -584,10 +584,99 @@
       box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
     }
 
-    .btn-ws-home-cta:hover {
-      background: #20bd5a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+    /* Sección de Videos Compactos en la Misma Línea */
+    .home-videos-section {
+      max-width: 1050px;
+      margin: 40px auto 25px;
+      padding: 0 20px;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .videos-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .video-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(141, 198, 63, 0.2);
+      border-color: var(--green, #8dc63f);
+    }
+
+    .video-player-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9/13;
+      max-height: 250px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-player-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-badge-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(141, 198, 63, 0.92);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-card-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .video-card-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.3;
+    }
+
+    .video-card-desc {
+      font-size: 11.5px;
+      color: #666;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -647,6 +736,54 @@
           <a href="pages/cloruro-de-magnesio.html" class="hero-btn-secondary">Ver Cloruro</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE VIDEOS COMPACTOS EN LA MISMA LÍNEA -->
+  <section class="home-videos-section">
+    <div class="section-pill-header" style="margin-bottom: 16px;">
+      <div class="section-pill-title" style="font-size: 20px; padding: 8px 32px;">Experiencia & Calidad en Video</div>
+      <p class="section-subtitle">Conoce de cerca la preparación, textura y disolución de nuestros productos</p>
+    </div>
+
+    <div class="videos-grid">
+      
+      <!-- VIDEO 1: video_colageno_1 -->
+      <article class="video-card">
+        <div class="video-player-box">
+          <span class="video-badge-tag">✨ 100% Soluble</span>
+          <video src="images/video_colageno_1.mp4" autoplay loop muted playsinline preload="auto"></video>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">Preparación Instantánea</h3>
+          <p class="video-card-desc">Disolución cristalina sin grumos</p>
+        </div>
+      </article>
+
+      <!-- VIDEO 2: video_colageno_2 -->
+      <article class="video-card">
+        <div class="video-player-box">
+          <span class="video-badge-tag">🌿 0% Azúcar</span>
+          <video src="images/video_colageno_2.mp4" autoplay loop muted playsinline preload="auto"></video>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">Nutrición & Vitalidad</h3>
+          <p class="video-card-desc">Con Vitamina C y Stevia</p>
+        </div>
+      </article>
+
+      <!-- VIDEO 3: video_colageno_3 -->
+      <article class="video-card">
+        <div class="video-player-box">
+          <span class="video-badge-tag">🛡️ Calidad Original</span>
+          <video src="images/video_colageno_3.mp4" autoplay loop muted playsinline preload="auto"></video>
+        </div>
+        <div class="video-card-body">
+          <h3 class="video-card-title">Sellado Hermético</h3>
+          <p class="video-card-desc">Empaque original garantizado</p>
+        </div>
+      </article>
+
     </div>
   </section>
 
