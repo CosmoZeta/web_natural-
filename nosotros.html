@@ -3,59 +3,494 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nosotros - Tienda Natural</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Sobre Nosotros - Del Campo a Tu Casa</title>
+  
+  <meta name="description" content="Conoce la historia, misión, visión y valores de Del Campo a Tu Casa. Alimentos y suplementos 100% naturales para tu bienestar.">
   <link rel="icon" type="image/png" href="images/logo_natural.png">
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- ESTO OCULTARÁ EL SPLASH SCREEN INMEDIATAMENTE EN ESTA PÁGINA -->
   <style>
-    #splash-screen {
-      display: none !important;
+    #splash-screen { display: none !important; }
+
+    .about-page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto 70px;
+      padding: 0 20px;
+    }
+
+    /* Título Banner Superior */
+    .about-hero-header {
+      text-align: center;
+      margin: 25px auto 45px;
+    }
+
+    .about-pill-title {
+      display: inline-block;
+      background: var(--green, #8dc63f);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 14px 50px;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(141, 198, 63, 0.35);
+      text-transform: uppercase;
+    }
+
+    .about-hero-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-top: 15px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Sección Principal Story */
+    .story-section {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 45px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04);
+      margin-bottom: 50px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    @media (max-width: 850px) {
+      .story-grid { grid-template-columns: 1fr; gap: 30px; }
+      .story-section { padding: 25px; }
+    }
+
+    .story-tag {
+      color: var(--green, #8dc63f);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .story-title {
+      font-size: 30px;
+      color: #111;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .story-text {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .highlights-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .highlight-item {
+      background: #f9fdf5;
+      border: 1px solid #e2f2d4;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .story-image-box {
+      position: relative;
+      text-align: center;
+    }
+
+    .story-image-box img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .story-image-box img:hover {
+      transform: scale(1.02);
+    }
+
+    .story-floating-badge {
+      position: absolute;
+      bottom: -15px;
+      right: 15px;
+      background: #111111;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      border: 2px solid var(--green, #8dc63f);
+    }
+
+    /* Misión, Visión, Valores */
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .mv-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 35px 28px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mv-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+      border-color: #dceec9;
+    }
+
+    .mv-icon {
+      width: 60px;
+      height: 60px;
+      background: #f0f8e9;
+      color: #6aa92c;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .mv-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 12px;
+    }
+
+    .mv-card p {
+      font-size: 14.5px;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* Sección de Galería de Productos Nuevos */
+    .gallery-showcase-section {
+      margin-bottom: 55px;
+    }
+
+    .showcase-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .showcase-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .showcase-header p {
+      font-size: 15px;
+      color: #666;
+    }
+
+    .product-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .showcase-item {
+      background: #ffffff;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+    }
+
+    .showcase-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+      border-color: var(--green, #8dc63f);
+    }
+
+    .showcase-img-wrap {
+      aspect-ratio: 1/1;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .showcase-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .showcase-item:hover .showcase-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .showcase-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .showcase-pill {
+      display: inline-block;
+      background: #f0f8e9;
+      color: #6aa92c;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    /* Banner CTA */
+    .about-cta-banner {
+      background: linear-gradient(135deg, #111111 0%, #1a2613 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 45px 30px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .about-cta-banner h2 {
+      font-size: 28px;
+      color: #8dc63f;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    .about-cta-banner p {
+      font-size: 15px;
+      color: #ccc;
+      max-width: 650px;
+      margin: 0 auto 25px;
+      line-height: 1.6;
+    }
+
+    .about-cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      background: var(--green, #8dc63f);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta-primary:hover {
+      background: #76b730;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(141, 198, 63, 0.35);
+    }
+
+    .btn-cta-whatsapp {
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta-whatsapp:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
     }
   </style>
 </head>
 <body>
   <div id="site-header"></div>
 
-  <main class="container">
-    <section class="about-section" style="padding: 100px 0 60px;">
-      <div class="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <a href="index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
+      <span style="color: #666;">Nosotros</span>
+    </div>
+  </div>
+
+  <main class="about-page-wrapper">
+    
+    <!-- TÍTULO PRINCIPAL EN PÍLDORA VERDE -->
+    <div class="about-hero-header">
+      <div class="about-pill-title">Sobre Nosotros</div>
+      <p class="about-hero-subtitle">Pasión por la nutrición consciente, del campo peruano directamente a tu mesa y bienestar.</p>
+    </div>
+
+    <!-- SECCIÓN 1: NUESTRA HISTORIA Y FILOSOFÍA -->
+    <section class="story-section">
+      <div class="story-grid">
         <div>
-          <img src="images/logo_natural.png" alt="Del Campo a Tu Casa" style="max-width:260px;display:block;margin:0 auto 30px;">
-          <h1>Alimentos Naturales & Saludables</h1>
-          <p>En Del Campo a tu Casa creemos que comer bien no tiene que ser complicado, solo tiene que ser real. Somos una marca peruana que ofrece más de 60 productos hechos con ingredientes 100% reales, sin químicos, sin colorantes y sin procesos industriales. Aquí no vendemos «productos saludables», vendemos comida real: la que nutre de verdad, respeta la naturaleza y cuida tu cuerpo.</p>
+          <span class="story-tag">Alimentación Real & Consciente</span>
+          <h1 class="story-title">De la Tierra a Tu Hogar con Amor y Pureza</h1>
+          <p class="story-text">
+            En <strong>Del Campo a Tu Casa</strong> creemos firmemente que comer bien no tiene que ser complicado; solo tiene que ser <strong>real</strong>. Nacimos como una iniciativa peruana dedicada a rescatar el valor de nuestros superalimentos, seleccionando los mejores frutos, semillas y minerales de los Andes y la Amazonía.
+          </p>
+          <p class="story-text">
+            Aquí no vendemos productos industrializados llenos de químicos o preservantes. Ofrecemos nutrición viva, pura y biodisponible, elaborada bajo estándares rigurosos de calidad que respetan la naturaleza y revitalizan tu cuerpo.
+          </p>
+
+          <div class="highlights-list">
+            <div class="highlight-item">🌿 100% Libre de Químicos</div>
+            <div class="highlight-item">🇵🇪 Origen Peruano Certificado</div>
+            <div class="highlight-item">👨‍🌾 Apoyo al Productor Local</div>
+            <div class="highlight-item">✨ Sin Azúcar ni Maltodextrina</div>
+          </div>
         </div>
-        <div>
-          <img src="images/header_uno.png" alt="Productos naturales" style="width:100%;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.12);">
+
+        <div class="story-image-box">
+          <img src="images/header_uno.png" alt="Productos Naturales Del Campo a Tu Casa" loading="lazy">
+          <div class="story-floating-badge">💚 Calidad Premium</div>
         </div>
       </div>
     </section>
 
-    <section class="values-section" style="padding: 0 0 60px;">
-      <div class="section-title" style="text-align:center;margin-bottom:40px;">
-        <h2>Nuestra razón de ser</h2>
+    <!-- SECCIÓN 2: MISIÓN, VISIÓN Y COMPROMISO -->
+    <section class="mission-vision-grid">
+      
+      <!-- MISIÓN -->
+      <article class="mv-card">
+        <div class="mv-icon">🎯</div>
+        <h3>Nuestra Misión</h3>
+        <p>Promover una cultura de salud y bienestar integral, ofreciendo colágenos hidrolizados, magnesio y superfoods de la más alta pureza y biodisponibilidad para transformar positivamente la vida de las familias peruanas.</p>
+      </article>
+
+      <!-- VISIÓN -->
+      <article class="mv-card">
+        <div class="mv-icon">🌟</div>
+        <h3>Nuestra Visión</h3>
+        <p>Ser reconocidos como el referente de excelencia y confianza en nutracéuticos y alimentos naturales del Perú, impulsando un estilo de vida saludable y una conexión respetuosa con nuestra biodiversidad.</p>
+      </article>
+
+      <!-- COMPROMISO -->
+      <article class="mv-card">
+        <div class="mv-icon">🤝</div>
+        <h3>Nuestro Compromiso</h3>
+        <p>Transparencia absoluta en cada fórmula. Garantizamos ingredientes limpios, trazabilidad de origen y una atención personalizada y cercana a cada uno de nuestros clientes y emprendedores.</p>
+      </article>
+
+    </section>
+
+    <!-- SECCIÓN 3: NUESTRAS LÍNEAS DESTACADAS CON NUEVAS IMÁGENES -->
+    <section class="gallery-showcase-section">
+      <div class="showcase-header">
+        <h2>Líneas de Nutrición Especializada</h2>
+        <p>Formuladas para el cuidado articular, óseo, celular y estético de toda la familia</p>
       </div>
-      <div class="values-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px;">
-        <article style="background:#fff;border-radius:18px;padding:28px;box-shadow:0 18px 40px rgba(0,0,0,.08);">
-          <h3>Alimentos reales</h3>
-          <p>Ofrecemos productos hechos con ingredientes simples, naturales y libres de aditivos que no necesitas.</p>
-        </article>
-        <article style="background:#fff;border-radius:18px;padding:28px;box-shadow:0 18px 40px rgba(0,0,0,.08);">
-          <h3>Tradición peruana</h3>
-          <p>Trabajamos con pequeños productores y recetas inspiradas en lo mejor de nuestra tierra.</p>
-        </article>
-        <article style="background:#fff;border-radius:18px;padding:28px;box-shadow:0 18px 40px rgba(0,0,0,.08);">
-          <h3>Sabor con propósito</h3>
-          <p>Nuestra misión es nutrir bien, cuidando la salud y la experiencia de comer con cariño.</p>
-        </article>
+
+      <div class="product-showcase-grid">
+        
+        <!-- Showcase 1: Colágeno Manzana -->
+        <div class="showcase-item">
+          <div class="showcase-img-wrap">
+            <img src="images/colageno_manzana.jpg" alt="Colágeno Sabor Manzana" loading="lazy">
+          </div>
+          <div class="showcase-name">Colágeno Hidrolizado Manzana</div>
+          <span class="showcase-pill">Piel & Articulaciones</span>
+        </div>
+
+        <!-- Showcase 2: Colágeno Fresa -->
+        <div class="showcase-item">
+          <div class="showcase-img-wrap">
+            <img src="images/colageno_fresa.jpg" alt="Colágeno Sabor Fresa" loading="lazy">
+          </div>
+          <div class="showcase-name">Colágeno Hidrolizado Fresa</div>
+          <span class="showcase-pill">Antioxidante Natural</span>
+        </div>
+
+        <!-- Showcase 3: Citrato de Magnesio -->
+        <div class="showcase-item">
+          <div class="showcase-img-wrap">
+            <img src="images/citrato_magnesio2.png" alt="Citrato de Magnesio Puro" loading="lazy">
+          </div>
+          <div class="showcase-name">Citrato de Magnesio Puro</div>
+          <span class="showcase-pill">Energía & Músculos</span>
+        </div>
+
+        <!-- Showcase 4: Pack Familiar -->
+        <div class="showcase-item">
+          <div class="showcase-img-wrap">
+            <img src="images/colagen_producto4.png" alt="Pack Colágeno Plus" loading="lazy">
+          </div>
+          <div class="showcase-name">Pack Colágeno Plus Familiar</div>
+          <span class="showcase-pill">Ahorro & Rendimiento</span>
+        </div>
+
       </div>
     </section>
 
-    <section class="image-row" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
-      <img src="images/header_dos.png" alt="Snack natural" style="width:100%;border-radius:18px;">
-      <img src="images/header_tres.png" alt="Producto saludable" style="width:100%;border-radius:18px;">
-      <img src="images/colagen_plus.jpg" alt="Colagen Plus" style="width:100%;border-radius:18px;">
-    </section>
+    <!-- SECCIÓN 4: BANNER CTA FINAL -->
+    <div class="about-cta-banner">
+      <h2>Empieza hoy tu camino hacia una vida más saludable</h2>
+      <p>Explora nuestro catálogo completo o comunícate con nuestros asesores para recibir una recomendación personalizada según tus necesidades.</p>
+      <div class="about-cta-buttons">
+        <a href="pages/products.html" class="btn-cta-primary">
+          🛍️ Explorar Tienda
+        </a>
+        <a href="https://wa.me/51935315393?text=Hola,%20quisiera%20asesoría%20sobre%20sus%20productos%20naturales" target="_blank" rel="noopener noreferrer" class="btn-cta-whatsapp">
+          💬 Hablar con un Asesor
+        </a>
+      </div>
+    </div>
+
   </main>
 
   <!-- Botones flotantes -->
@@ -63,6 +498,8 @@
   <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
 
   <div id="site-footer"></div>
+
+  <!-- SCRIPTS -->
   <script src="js/include-partials.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>

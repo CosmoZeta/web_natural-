@@ -1,0 +1,29 @@
+# Security Headers Configuration for Apache
+<IfModule mod_headers.c>
+    # Protect against Clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Protect against MIME-type Sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Enable XSS Filtering in older browsers
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy (restrict sensitive features)
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # HTTP Strict Transport Security (HSTS) - Enabled when running on HTTPS
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Disable Directory Browsing
+Options -Indexes
+
+# Protect hidden files (.git, .env, etc.)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

@@ -10,7 +10,7 @@
 // ==========================================
 const CONFIG = Object.freeze({
   whatsapp: {
-    phone: '+51967678197',
+    phone: '+51935315393',
     defaultMessage: 'Hola, quisiera más información sobre sus productos',
     baseUrl: 'https://wa.me/'
   },
@@ -66,6 +66,17 @@ class DOMUtils {
     if (!str) return '';
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
+
+  static sanitizeInput(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .trim();
+  }
 }
 
 // ==========================================
@@ -113,7 +124,7 @@ class CartController {
 }
 
 /**
- * Single Responsibility: Handles Partner Form submissions and UX feedback.
+ * Single Responsibility: Handles Partner Form submissions and UX feedback with anti-spam check.
  */
 class PartnerFormController {
   init(formSelector) {
@@ -125,7 +136,19 @@ class PartnerFormController {
 
   handleSubmit(event, form) {
     event.preventDefault();
-    alert('Gracias — recibimos tu solicitud. Nos pondremos en contacto pronto.');
+
+    // Honeypot bot protection check
+    const honeypot = form.querySelector('input[name="website_honeypot"]');
+    if (honeypot && honeypot.value.trim() !== '') {
+      console.warn('Bot submission blocked via Honeypot check.');
+      form.reset();
+      return;
+    }
+
+    const formData = new FormData(form);
+    const name = DOMUtils.sanitizeInput(formData.get('name'));
+
+    alert(`Gracias ${name || ''} — recibimos tu solicitud. Nos pondremos en contacto pronto.`);
     form.reset();
   }
 }
@@ -343,18 +366,23 @@ class ProductSorter {
 
   sort() {
     const value = this.select.value;
-    const cards = Array.from(this.grid.querySelectorAll('.product-card'));
+    const cards = Array.from(this.grid.children);
 
     const sortedCards = cards.sort((a, b) => {
-      if (value === 'name-asc') {
-        const nameA = a.querySelector('h3').textContent.trim().toLowerCase();
-        const nameB = b.querySelector('h3').textContent.trim().toLowerCase();
+      const titleElA = a.querySelector('h3');
+      const titleElB = b.querySelector('h3');
+      const priceElA = a.querySelector('.price, .card-price');
+      const priceElB = b.querySelector('.price, .card-price');
+
+      if (value === 'name-asc' && titleElA && titleElB) {
+        const nameA = titleElA.textContent.trim().toLowerCase();
+        const nameB = titleElB.textContent.trim().toLowerCase();
         return nameA.localeCompare(nameB);
       }
 
-      if (value === 'price-asc' || value === 'price-desc') {
-        const priceA = this.parsePrice(a.querySelector('.price').textContent);
-        const priceB = this.parsePrice(b.querySelector('.price').textContent);
+      if ((value === 'price-asc' || value === 'price-desc') && priceElA && priceElB) {
+        const priceA = this.parsePrice(priceElA.textContent);
+        const priceB = this.parsePrice(priceElB.textContent);
         return value === 'price-asc' ? priceA - priceB : priceB - priceA;
       }
 
@@ -369,6 +397,63 @@ class ProductSorter {
   parsePrice(priceString) {
     // Extracts numeric value from strings like "S/30.00"
     return parseFloat(priceString.replace(/[^\d.]/g, '')) || 0;
+  }
+}
+
+/**
+ * Single Responsibility: Filters products dynamically based on benefit tags and updates the counter.
+ */
+class BenefitFilterController {
+  init(gridSelector = '#store-grid-container') {
+    this.filterButtons = DOMUtils.selectAll('.benefit-filter-btn, .benefit-filter a, .benefit-filter button');
+    this.grid = DOMUtils.select(gridSelector);
+    this.resultsText = DOMUtils.select('.results-count-text');
+
+    if (!this.filterButtons.length || !this.grid) return;
+
+    this.items = Array.from(this.grid.children);
+
+    this.filterButtons.forEach(btn => {
+      DOMUtils.addSafeEventListener(btn, 'click', (e) => {
+        e.preventDefault();
+        const filterVal = btn.getAttribute('data-filter') || 'all';
+        const labelText = btn.querySelector('span')?.textContent.trim() || btn.textContent.trim();
+        this.applyFilter(filterVal, btn, labelText);
+      });
+    });
+  }
+
+  applyFilter(filterVal, activeBtn, labelText) {
+    // Update active class on filter items
+    this.filterButtons.forEach(b => {
+      const parentLi = b.closest('.filter-pill-item') || b;
+      parentLi.classList.remove('active');
+    });
+
+    const activeLi = activeBtn.closest('.filter-pill-item') || activeBtn;
+    activeLi.classList.add('active');
+
+    let visibleCount = 0;
+
+    this.items.forEach(item => {
+      const cardTags = (item.getAttribute('data-benefits') || item.querySelector('.product-card, .store-product-card')?.getAttribute('data-benefits') || '').toLowerCase();
+      
+      if (filterVal === 'all' || cardTags.includes(filterVal.toLowerCase())) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    // Update results text if present
+    if (this.resultsText) {
+      if (filterVal === 'all') {
+        this.resultsText.innerHTML = `Mostrando <strong>${visibleCount}</strong> productos disponibles`;
+      } else {
+        this.resultsText.innerHTML = `Mostrando <strong>${visibleCount}</strong> resultados para <strong>"${labelText}"</strong>`;
+      }
+    }
   }
 }
 
@@ -417,6 +502,37 @@ class SplashScreenController {
   }
 }
 
+/**
+ * Single Responsibility: Manages header & logo enlargement transitions on page scroll.
+ */
+class HeaderScrollController {
+  static isInitialized = false;
+
+  init() {
+    if (HeaderScrollController.isInitialized) return;
+    HeaderScrollController.isInitialized = true;
+
+    const handleScroll = () => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+      const isScrolled = scrollY > 15;
+
+      document.body.classList.toggle('page-scrolled', isScrolled);
+
+      const headerEl = document.getElementById('site-header');
+      if (headerEl) headerEl.classList.toggle('scrolled', isScrolled);
+
+      const navEl = document.querySelector('.site-navbar');
+      if (navEl) navEl.classList.toggle('scrolled', isScrolled);
+
+      const logoEls = document.querySelectorAll('.site-logo, .logo');
+      logoEls.forEach(logo => logo.classList.toggle('scrolled', isScrolled));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
+}
+
 // ==========================================
 // 4. APPLICATION BOOTSTRAP (Mediator / Facade)
 // ==========================================
@@ -440,6 +556,8 @@ class App {
     new SplashScreenController().init(CONFIG.selectors.splashScreen, CONFIG.selectors.splashClose);
     new ProductSorter().init(CONFIG.selectors.sortSelect, CONFIG.selectors.productsGrid);
     new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
+    new BenefitFilterController().init(CONFIG.selectors.productsGrid);
+    new HeaderScrollController().init();
   }
 }
 
@@ -447,6 +565,7 @@ class App {
 document.addEventListener('partialLoaded', (e) => {
   if (e.detail.selector === '#site-header') {
     new SearchController().init(CONFIG.selectors.searchTrigger, CONFIG.selectors.searchInput, CONFIG.selectors.productsGrid);
+    new HeaderScrollController().init();
   }
 });
 

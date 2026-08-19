@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Contacto - Del Campo a Tu Casa</title>
   
   <meta name="description" content="Ponte en contacto con nosotros. Visítanos en Surco, Lima, llámanos o escríbenos para vender nuestros productos naturales.">
@@ -35,14 +38,14 @@
       <div class="contact-card">
         <div style="font-size: 32px; margin-bottom: 12px;">📱</div>
         <h3 style="font-size: 16px; letter-spacing: 2px; margin-bottom: 8px;">TELÉFONO</h3>
-        <p style="color: var(--green); font-size: 15px; font-weight: 600; line-height: 1.5;">+51 951 379 798</p>
+        <p style="color: var(--green); font-size: 15px; font-weight: 600; line-height: 1.5;">+51 935 315 393</p>
       </div>
 
       <div class="contact-card">
         <div style="font-size: 32px; margin-bottom: 12px;">✉️</div>
         <h3 style="font-size: 16px; letter-spacing: 2px; margin-bottom: 8px;">EMAIL</h3>
         <p style="font-size: 14px; line-height: 1.5;">
-          <a href="mailto:Contacto@delcampoatucasaperu.com" style="color: var(--green); text-decoration: none; font-weight: 600;">Contacto@delcampoatucasaperu.com</a>
+          <a href="mailto:mfr.asesoresjuridicos@gmail.com" style="color: var(--green); text-decoration: none; font-weight: 600;">mfr.asesoresjuridicos@gmail.com</a>
         </p>
       </div>
 
@@ -58,16 +61,20 @@
         </div>
 
         <div class="partner-right" style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-          <form id="contact-page-form" class="partner-form">
+          <form id="contact-page-form" class="partner-form" autocomplete="on">
+            <!-- Campo Honeypot Oculto para Trampa de Bots -->
+            <div style="display:none !important;" aria-hidden="true">
+              <input type="text" name="website_honeypot" tabindex="-1" autocomplete="off">
+            </div>
             <div class="row" style="display: flex; gap: 15px; margin-bottom: 15px;">
-              <input type="text" name="name" placeholder="Nombre" required style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
-              <input type="email" name="email" placeholder="Correo electrónico" required style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+              <input type="text" name="name" placeholder="Nombre" required maxlength="60" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+              <input type="email" name="email" placeholder="Correo electrónico" required maxlength="100" style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
             </div>
             <div style="margin-bottom: 15px;">
-              <input type="text" name="phone" placeholder="Teléfono" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+              <input type="tel" name="phone" placeholder="Teléfono" inputmode="tel" maxlength="15" pattern="^\+?[0-9\s\-]{7,15}$" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
             </div>
             <div style="margin-bottom: 20px;">
-              <textarea name="message" placeholder="¿Cómo podemos ayudarte?" rows="5" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+              <textarea name="message" placeholder="¿Cómo podemos ayudarte?" rows="5" maxlength="500" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
             </div>
             <button type="submit" style="background: var(--green); color: #fff; border: none; padding: 14px 24px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 14px; transition: background 0.2s;">QUIERO MÁS INFORMACIÓN</button>
           </form>

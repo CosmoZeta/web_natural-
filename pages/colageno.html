@@ -3,157 +3,572 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Colágeno Hidrolizado - Tienda Natural</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Colágeno Hidrolizado - Del Campo a Tu Casa</title>
   
-  <meta name="description" content="Descubre nuestra línea exclusiva de colágeno hidrolizado natural con camu camu, magnesio y zinc para el cuidado de tu piel, articulaciones y salud.">
+  <meta name="description" content="Línea completa de colágeno hidrolizado puro en sabores naturales manzana, fresa, mora, naranja, pera y sachets individuales.">
   <link rel="icon" type="image/png" href="../images/logo_natural.png">
   <link rel="stylesheet" href="../css/styles.css">
   
   <style>
-    #splash-screen {
-      display: none !important;
+    #splash-screen { display: none !important; }
+
+    .products-page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto 70px;
+      padding: 0 20px;
     }
-    .filter-list a {
-      color: inherit;
-      text-decoration: none;
+
+    .products-hero-header {
+      text-align: center;
+      margin: 25px auto 40px;
+    }
+
+    .products-pill-title {
+      display: inline-block;
+      background: var(--green, #8dc63f);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 14px 50px;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(141, 198, 63, 0.35);
+      text-transform: uppercase;
+    }
+
+    .products-hero-subtitle {
+      font-size: 15.5px;
+      color: #666;
+      margin-top: 14px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .catalog-layout { grid-template-columns: 1fr; }
+    }
+
+    .catalog-sidebar {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 26px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 130px;
+    }
+
+    .sidebar-section-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #111;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-pills-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-pill-item a {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      transition: color 0.2s;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #444;
+      background: #fbfbfb;
+      border: 1px solid #f0f0f0;
+      transition: all 0.2s ease;
     }
-    .filter-list a:hover,
-    .filter-list li.active a {
-      color: var(--green);
-      font-weight: bold;
+
+    .filter-pill-item.active a,
+    .filter-pill-item a:hover {
+      background: #f0f8e9;
+      color: var(--green, #8dc63f);
+      border-color: #dceec9;
+      transform: translateX(4px);
+    }
+
+    .pill-badge {
+      background: rgba(0,0,0,0.06);
+      color: #555;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .filter-pill-item.active .pill-badge {
+      background: var(--green, #8dc63f);
+      color: #ffffff;
+    }
+
+    .sidebar-guarantee-card {
+      background: linear-gradient(135deg, #f7fcf2 0%, #edf7e4 100%);
+      border: 1px dashed #cde6b8;
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .sidebar-guarantee-card h4 {
+      font-size: 13.5px;
+      color: #2e5910;
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .sidebar-guarantee-card p {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .catalog-controls {
+      background: #ffffff;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .results-count-text {
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .results-count-text strong {
+      color: #111;
+    }
+
+    .sort-wrapper select {
+      padding: 8px 16px;
+      border: 1.5px solid #ddd;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      background: #fff;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+
+    .store-product-card {
+      background: #ffffff;
+      border: 1px solid #ebebeb;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .store-product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.09);
+      border-color: var(--green, #8dc63f);
+    }
+
+    .card-promo-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #111111;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .card-promo-badge.green {
+      background: var(--green, #8dc63f);
+    }
+
+    .card-image-box {
+      aspect-ratio: 1/1;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .card-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .store-product-card:hover .card-image-box img {
+      transform: scale(1.08);
+    }
+
+    .card-rating-stars {
+      color: #ffb400;
+      font-size: 12px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    .card-rating-stars span {
+      color: #888;
+      font-size: 11px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      min-height: 38px;
+    }
+
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .card-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--green, #8dc63f);
+    }
+
+    .card-btn-view {
+      background: #f7fbf2;
+      color: var(--green, #8dc63f);
+      border: 1.5px solid #dceec9;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .store-product-card:hover .card-btn-view {
+      background: var(--green, #8dc63f);
+      color: #ffffff;
+      border-color: var(--green, #8dc63f);
     }
   </style>
 </head>
 <body>
   <div id="site-header"></div>
 
+  <!-- Breadcrumb -->
   <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
     <div class="container">
       <a href="../index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
       <a href="products.html" style="color: var(--dark); text-decoration: none;">Tienda</a> / 
-      <span>Colágeno</span>
+      <span style="color: #666;">Colágeno Hidrolizado</span>
     </div>
   </div>
 
-  <main class="container" style="margin-bottom: 60px;">
-    <div class="store-layout">
+  <main class="products-page-wrapper">
+    
+    <!-- ENCABEZADO CON PÍLDORA VERDE -->
+    <div class="products-hero-header">
+      <div class="products-pill-title">Colágeno Hidrolizado</div>
+      <p class="products-hero-subtitle">Péptidos bioactivos de máxima asimilación para la firmeza de la piel, vitalidad capilar y regeneración de cartílagos.</p>
+    </div>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="catalog-layout">
       
-      <aside class="sidebar">
-        <h4 style="text-transform: uppercase; font-size: 14px; margin-bottom: 16px;">Categorías</h4>
-        <ul class="filter-list">
-          <li><a href="products.html">Todos los productos <span class="badge">18</span></a></li>
-          <li class="active"><a href="colageno.html">Colágeno <span class="badge">6</span></a></li>
-          <li><a href="citrato-de-magnesio.html">Citrato de Magnesio <span class="badge">6</span></a></li>
-          <li><a href="cloruro-de-magnesio.html">Cloruro de Magnesio <span class="badge">6</span></a></li>
+      <!-- SIDEBAR FILTROS -->
+      <aside class="catalog-sidebar">
+        
+        <div class="sidebar-section-title">🌿 Categorías</div>
+        <ul class="filter-pills-list">
+          <li class="filter-pill-item">
+            <a href="products.html">
+              <span>Todos los productos</span>
+              <span class="pill-badge">18</span>
+            </a>
+          </li>
+          <li class="filter-pill-item active">
+            <a href="colageno.html">
+              <span>Colágeno Hidrolizado</span>
+              <span class="pill-badge">9</span>
+            </a>
+          </li>
+          <li class="filter-pill-item">
+            <a href="citrato-de-magnesio.html">
+              <span>Citrato de Magnesio</span>
+              <span class="pill-badge">6</span>
+            </a>
+          </li>
+          <li class="filter-pill-item">
+            <a href="cloruro-de-magnesio.html">
+              <span>Cloruro de Magnesio</span>
+              <span class="pill-badge">6</span>
+            </a>
+          </li>
         </ul>
 
-        <h4 style="text-transform: uppercase; font-size: 14px; margin-top: 36px; margin-bottom: 16px;">Beneficios</h4>
-        <ul class="filter-list">
-          <li>Piel firme y articulaciones <span class="badge">6</span></li>
-          <li>100% Puro y Natural <span class="badge">6</span></li>
-          <li>Sin Azúcar Añadida <span class="badge">6</span></li>
+        <div class="sidebar-section-title" style="margin-top: 25px;">🎯 Beneficios Clave</div>
+        <ul class="filter-pills-list">
+          <li class="filter-pill-item active benefit-filter"><a href="#" data-filter="all"><span>✨ Ver Todos</span></a></li>
+          <li class="filter-pill-item benefit-filter"><a href="#" data-filter="piel"><span>✨ Rejuvenecimiento Facial & Piel</span></a></li>
+          <li class="filter-pill-item benefit-filter"><a href="#" data-filter="articulaciones"><span>🦴 Fortalecimiento Articular</span></a></li>
+          <li class="filter-pill-item benefit-filter"><a href="#" data-filter="cabello"><span>💇‍♀️ Anticaída & Brillo de Cabello</span></a></li>
+          <li class="filter-pill-item benefit-filter"><a href="#" data-filter="sin-azucar"><span>🌱 0% Azúcar / Stevia</span></a></li>
         </ul>
 
-        <label style="display: flex; align-items: center; gap: 8px; margin-top: 24px; color: var(--muted); font-size: 14px; cursor: pointer;">
-          <input type="checkbox"> Ver productos en oferta
-        </label>
+        <div class="sidebar-guarantee-card">
+          <h4>🧪 Bioabsorción Comprobada</h4>
+          <p>Colágeno de bajo peso molecular que penetra directamente a nivel celular.</p>
+        </div>
+
       </aside>
 
-      <div class="products-grid">
-        <div class="store-controls">
-          <span style="font-size: 14px;">Mostrando 1–6 resultados de <strong>Colágeno</strong></span>
-          <div class="sort">
-            <select id="sort-products" aria-label="Ordenar productos">
+      <!-- CUADRÍCULA DE PRODUCTOS -->
+      <section class="catalog-content">
+        
+        <!-- BARRA DE CONTROL Y ORDEN -->
+        <div class="catalog-controls">
+          <div class="results-count-text">
+            Mostrando <strong>9</strong> resultados de <strong>Colágeno Hidrolizado</strong>
+          </div>
+          <div class="sort-wrapper">
+            <select id="sort-products" aria-label="Ordenar productos por">
               <option value="default">Orden predeterminado</option>
-              <option value="name-asc">Ordenar por nombre (A-Z)</option>
-              <option value="price-asc">Ordenar por precio: bajo a alto</option>
-              <option value="price-desc">Ordenar por precio: alto a bajo</option>
+              <option value="name-asc">Nombre: A - Z</option>
+              <option value="price-asc">Precio: de menor a mayor</option>
+              <option value="price-desc">Precio: de mayor a menor</option>
             </select>
           </div>
         </div>
 
-        <div class="grid store-grid" id="store-grid-container">
+        <!-- PRODUCTOS -->
+        <div class="catalog-grid" id="store-grid-container">
           
-          <!-- PRODUCTO 1 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_plus.jpg" alt="Colágeno Hidrolizado Plus 500gr" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>COLÁGENO HIDROLIZADO PLUS 500GR</h3>
-              <div class="price">S/65.00</div>
-            </div>
-          </article>
+          <!-- 1. BOLSA COLÁGENO MANZANA -->
+          <a href="producto-detalle.html?id=bolsa-colageno-manzana" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Formato Económico</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/bolsa_colageno_manzana.jpg" alt="Bolsa de Colágeno Sabor Manzana 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.9)</span></div>
+              <h3 class="card-title">BOLSA DE COLÁGENO SABOR MANZANA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/55.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
-          <!-- PRODUCTO 2 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_producto1.png" alt="Colágeno con Camu Camu" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>COLÁGENO CON CAMU CAMU</h3>
-              <div class="price">S/55.00</div>
-            </div>
-          </article>
+          <!-- 2. CAJA COLÁGENO MANZANA -->
+          <a href="producto-detalle.html?id=caja-colageno-manzana" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">30 Sachets</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/caja_colageno_manzana.jpg" alt="Caja de Colágeno Sabor Manzana (30 Sachets)" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(5.0)</span></div>
+              <h3 class="card-title">CAJA DE COLÁGENO SABOR MANZANA (30 SACHETS)</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/65.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
-          <!-- PRODUCTO 3 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_producto2.png" alt="Colágeno con Magnesio y Zinc" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>COLÁGENO CON MAGNESIO Y ZINC</h3>
-              <div class="price">S/60.00</div>
-            </div>
-          </article>
+          <!-- 3. PACK X3 COLÁGENO PLUS FAMILIAR -->
+          <a href="producto-detalle.html?id=pack-colageno-plus" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge green">Ahorro Familiar</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colagen_producto4.png" alt="Pack x3 Colágeno Plus Familiar" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.9)</span></div>
+              <h3 class="card-title">PACK X3 COLÁGENO PLUS FAMILIAR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/160.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
-          <!-- PRODUCTO 4 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_producto3.png" alt="Colágeno Premium Sabor Naranja" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>COLÁGENO PREMIUM SABOR NARANJA</h3>
-              <div class="price">S/58.00</div>
-            </div>
-          </article>
+          <!-- 4. COLÁGENO FRESA -->
+          <a href="producto-detalle.html?id=colageno-fresa" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Favorito</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colageno_fresa.jpg" alt="Colágeno Hidrolizado Sabor Fresa 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.8)</span></div>
+              <h3 class="card-title">COLÁGENO HIDROLIZADO SABOR FRESA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/50.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
-          <!-- PRODUCTO 5 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_producto4.png" alt="Pack x3 Colágeno Plus Familiar" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>PACK X3 COLÁGENO PLUS FAMILIAR</h3>
-              <div class="price">S/160.00</div>
-            </div>
-          </article>
+          <!-- 5. COLÁGENO MANZANA -->
+          <a href="producto-detalle.html?id=colageno-manzana" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">100% Puro</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colageno_manzana.jpg" alt="Colágeno Hidrolizado Sabor Manzana 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.9)</span></div>
+              <h3 class="card-title">COLÁGENO HIDROLIZADO SABOR MANZANA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/50.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
-          <!-- PRODUCTO 6 -->
-          <article class="product-card store-card">
-            <figure class="img-wrap" style="margin: 0;">
-              <img src="../images/colagen_uno.jpg" alt="Colágeno en Cápsulas 100 Unid" loading="lazy">
-            </figure>
-            <div class="card-body">
-              <h3>COLÁGENO EN CÁPSULAS 100 UNID</h3>
-              <div class="price">S/45.00</div>
-            </div>
-          </article>
+          <!-- 6. COLÁGENO MORA -->
+          <a href="producto-detalle.html?id=colageno-mora" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Antioxidante</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colageno_mora.jpg" alt="Colágeno Hidrolizado Sabor Mora 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.9)</span></div>
+              <h3 class="card-title">COLÁGENO HIDROLIZADO SABOR MORA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/50.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
+
+          <!-- 7. COLÁGENO NARANJA -->
+          <a href="producto-detalle.html?id=colageno-naranja" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Vitamina C</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colageno_naranja.jpg" alt="Colágeno Hidrolizado Sabor Naranja 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.8)</span></div>
+              <h3 class="card-title">COLÁGENO HIDROLIZADO SABOR NARANJA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/50.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
+
+          <!-- 8. COLÁGENO PERA -->
+          <a href="producto-detalle.html?id=colageno-pera" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Suave & Digest</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/colageno_pera.jpg" alt="Colágeno Hidrolizado Sabor Pera 500gr" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(4.8)</span></div>
+              <h3 class="card-title">COLÁGENO HIDROLIZADO SABOR PERA 500GR</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/50.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
+
+          <!-- 9. UNIDAD COLÁGENO MANZANA -->
+          <a href="producto-detalle.html?id=unidad-colageno-manzana" class="product-card-link" data-benefits="piel articulaciones cabello sin-azucar">
+            <article class="store-product-card product-card">
+              <span class="card-promo-badge">Muestra Individual</span>
+              <figure class="card-image-box img-wrap" style="margin: 0;">
+                <img src="../images/unidad_colageno_manzana.jpg" alt="Unidad de Colágeno Sabor Manzana (Sachet)" loading="lazy">
+              </figure>
+              <div class="card-rating-stars">★★★★★ <span>(5.0)</span></div>
+              <h3 class="card-title">UNIDAD DE COLÁGENO SABOR MANZANA (SACHET)</h3>
+              <div class="card-price-row">
+                <div class="card-price price">S/5.00</div>
+              </div>
+              <span class="card-btn-view">Ver Detalles ➔</span>
+            </article>
+          </a>
 
         </div>
-      </div>
+
+      </section>
+
     </div>
+
   </main>
 
+  <!-- Botones flotantes -->
   <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
   <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
 
   <div id="site-footer"></div>
 
+  <!-- SCRIPTS -->
   <script src="../js/include-partials.js" defer></script>
   <script src="../js/main.js" defer></script>
 </body>

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Detalle de Producto - Tienda Natural</title>
+  
+  <meta name="description" content="Conoce las características, beneficios nutricionales y modo de uso de nuestros productos naturales.">
+  <link rel="icon" type="image/png" href="../images/logo_natural.png">
+  <link rel="stylesheet" href="../css/styles.css">
+  
+  <style>
+    #splash-screen { display: none !important; }
+
+    /* Estilos de la vista de detalle */
+    .product-detail-section { padding: 40px 0 60px; }
+    .product-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: start; }
+    
+    @media (max-width: 850px) {
+      .product-detail-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    .detail-gallery { 
+      background: #fff; 
+      padding: 25px; 
+      border-radius: 12px; 
+      border: 1px solid #eee; 
+      position: relative; 
+      text-align: center; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+      overflow: hidden; 
+      cursor: crosshair; 
+      user-select: none;
+    }
+    
+    .detail-image-wrapper {
+      width: 100%;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .detail-gallery img { 
+      max-width: 100%; 
+      max-height: 100%; 
+      object-fit: contain; 
+      border-radius: 8px; 
+      transition: transform 0.15s ease-out; 
+      transform-origin: center center;
+      pointer-events: none;
+      will-change: transform, transform-origin;
+    }
+
+    .zoom-indicator-badge {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      transition: opacity 0.25s ease;
+      z-index: 4;
+      backdrop-filter: blur(4px);
+    }
+
+    .detail-gallery:hover .zoom-indicator-badge {
+      opacity: 0;
+    }
+
+    .detail-badge { position: absolute; top: 20px; left: 20px; background: var(--green, #8dc63f); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; z-index: 2; box-shadow: 0 2px 8px rgba(141,198,63,0.3); }
+
+    .detail-info { display: flex; flex-direction: column; gap: 16px; }
+    .detail-category { color: var(--green, #8dc63f); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+    .detail-title { font-size: 28px; color: #111; margin: 0; line-height: 1.2; font-weight: 800; }
+    .detail-subtitle { font-size: 15px; color: #666; margin-top: -6px; line-height: 1.4; font-style: italic; }
+
+    .rating-stars { color: #ffb400; font-size: 16px; display: flex; align-items: center; gap: 6px; }
+    .rating-count { color: #888; font-size: 13px; margin-left: 6px; }
+
+    .detail-price { font-size: 32px; color: var(--green, #8dc63f); font-weight: 800; margin: 5px 0; }
+
+    .detail-description { font-size: 14px; color: #444; line-height: 1.6; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 15px 0; }
+
+    .guarantees-row { display: flex; gap: 15px; flex-wrap: wrap; margin: 5px 0; }
+    .guarantee-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; background: #f9fdf5; border: 1px solid #e2f2d4; padding: 8px 12px; border-radius: 6px; font-weight: 600; }
+
+    .purchase-box { display: flex; gap: 15px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+    .quantity-control { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; background: #fff; }
+    .quantity-btn { background: #f5f5f5; border: none; width: 38px; height: 42px; font-size: 18px; font-weight: bold; cursor: pointer; color: #333; transition: background 0.2s; }
+    .quantity-btn:hover { background: #e8e8e8; }
+    .quantity-input { width: 48px; height: 42px; border: none; text-align: center; font-size: 16px; font-weight: bold; color: #111; outline: none; }
+
+    .btn-ws-order { flex: 1; min-width: 220px; background: #25D366; color: #fff; text-decoration: none; padding: 14px 20px; border-radius: 6px; font-weight: bold; text-align: center; font-size: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 12px rgba(37,211,102,0.3); transition: transform 0.2s, background 0.2s; border: none; cursor: pointer; }
+    .btn-ws-order:hover { background: #20bd5a; transform: translateY(-2px); }
+
+    .btn-add-cart { background: #111; color: #fff; border: none; padding: 14px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+    .btn-add-cart:hover { background: #333; }
+
+    /* Tabs de Información */
+    .tabs-section { margin-top: 50px; background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+    .tabs-header { display: flex; gap: 20px; border-bottom: 2px solid #f0f0f0; margin-bottom: 25px; flex-wrap: wrap; }
+    .tab-btn { background: none; border: none; padding: 12px 18px; font-size: 15px; font-weight: 700; color: #777; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+    .tab-btn:hover, .tab-btn.active { color: var(--green, #8dc63f); border-bottom-color: var(--green, #8dc63f); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .feature-list, .benefit-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+    .feature-list li, .benefit-list li { background: #fdfdfd; border: 1px solid #f0f0f0; padding: 14px 18px; border-radius: 8px; font-size: 14px; line-height: 1.5; color: #333; display: flex; align-items: flex-start; gap: 10px; }
+    .feature-list li::before { content: "✔"; color: var(--green, #8dc63f); font-weight: bold; font-size: 16px; }
+    .benefit-list li::before { content: "💚"; font-size: 16px; }
+
+    .specs-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .specs-table th, .specs-table td { padding: 12px 16px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; }
+    .specs-table th { background: #f9f9f9; color: #555; width: 35%; font-weight: 600; }
+    .specs-table td { color: #222; font-weight: 500; }
+
+    /* Productos relacionados */
+    .related-section { margin-top: 60px; }
+    .related-title { text-align: center; font-size: 22px; margin-bottom: 30px; font-weight: 800; color: #111; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+
+    .product-card-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+    .product-card-link:hover .product-card { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .product-card { transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <a href="../index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
+      <a href="products.html" style="color: var(--dark); text-decoration: none;">Tienda</a> / 
+      <span id="breadcrumb-category">Categoría</span> / 
+      <span id="breadcrumb-product" style="color: #666;">Nombre de Producto</span>
+    </div>
+  </div>
+
+  <main class="container product-detail-section">
+    
+    <!-- GRID PRINCIPAL DE DETALLE -->
+    <div class="product-detail-grid">
+      
+      <!-- GALERÍA / IMAGEN CON ZOOM INTERACTIVO -->
+      <div class="detail-gallery" id="zoom-gallery-container">
+        <span class="detail-badge" id="pd-badge">100% Natural</span>
+        <div class="detail-image-wrapper">
+          <img id="pd-image" src="../images/colagen_plus.jpg" alt="Cargando producto...">
+        </div>
+        <div class="zoom-indicator-badge">🔍 Pasa el mouse para ampliar</div>
+      </div>
+
+      <!-- INFORMACIÓN DEL PRODUCTO -->
+      <div class="detail-info">
+        <span class="detail-category" id="pd-category">CATEGORÍA</span>
+        <h1 class="detail-title" id="pd-title">Cargando Nombre de Producto...</h1>
+        <div class="detail-subtitle" id="pd-subtitle">Subtítulo del producto</div>
+
+        <div class="rating-stars">
+          ★★★★★ <span class="rating-count">(4.9/5 | 48 valoraciones verificadas)</span>
+        </div>
+
+        <div class="detail-price" id="pd-price">S/00.00</div>
+
+        <div class="detail-description" id="pd-description">
+          Cargando la descripción del producto...
+        </div>
+
+        <!-- GARANTÍAS DE CALIDAD -->
+        <div class="guarantees-row">
+          <div class="guarantee-item">🌿 100% Libres de Químicos</div>
+          <div class="guarantee-item">🇵🇪 Origen Peruano Garantizado</div>
+          <div class="guarantee-item">🚚 Envío Rápido a Lima y Provincias</div>
+        </div>
+
+        <!-- CAJA DE COMPRA Y CANTIDAD -->
+        <div class="purchase-box">
+          <div class="quantity-control">
+            <button type="button" class="quantity-btn" id="qty-minus">-</button>
+            <input type="number" id="qty-input" class="quantity-input" value="1" min="1" max="99" readonly>
+            <button type="button" class="quantity-btn" id="qty-plus">+</button>
+          </div>
+
+          <button id="btn-ws-direct" class="btn-ws-order">
+            💬 Pedir por WhatsApp
+          </button>
+
+          <button id="btn-cart-add" class="btn-add-cart">
+            🛒 Añadir
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PESTAÑAS DE CARACTERÍSTICAS Y ESPECIFICACIONES -->
+    <section class="tabs-section">
+      <div class="tabs-header">
+        <button class="tab-btn active" data-tab="tab-features">📋 Características & Especificaciones</button>
+        <button class="tab-btn" data-tab="tab-benefits">💚 Beneficios Nutricionales</button>
+        <button class="tab-btn" data-tab="tab-usage">🥣 Modo de Uso & Consumo</button>
+      </div>
+
+      <!-- TAB 1: CARACTERÍSTICAS -->
+      <div class="tab-panel active" id="tab-features">
+        <h3 style="font-size: 16px; margin-bottom: 16px; color: #111;">Características Principales</h3>
+        <ul class="feature-list" id="pd-features-list">
+          <li>Cargando características...</li>
+        </ul>
+
+        <h3 style="font-size: 16px; margin-top: 30px; margin-bottom: 16px; color: #111;">Ficha Técnica</h3>
+        <table class="specs-table">
+          <tbody id="pd-specs-table">
+            <tr><th>Cargando...</th><td>...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TAB 2: BENEFICIOS -->
+      <div class="tab-panel" id="tab-benefits">
+        <h3 style="font-size: 16px; margin-bottom: 16px; color: #111;">Beneficios para tu Salud</h3>
+        <ul class="benefit-list" id="pd-benefits-list">
+          <li>Cargando beneficios...</li>
+        </ul>
+      </div>
+
+      <!-- TAB 3: MODO DE USO -->
+      <div class="tab-panel" id="tab-usage">
+        <h3 style="font-size: 16px; margin-bottom: 16px; color: #111;">Recomendaciones de Consumo</h3>
+        <div id="pd-usage-content" style="font-size: 14px; line-height: 1.7; color: #444; background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+          Cargando recomendaciones de uso...
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS RELACIONADOS -->
+    <section class="related-section">
+      <h2 class="related-title">TAMBIÉN TE PUEDE INTERESAR</h2>
+      <div class="related-grid" id="related-products-grid">
+        <!-- Productos dinámicos -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Botones flotantes -->
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <div id="site-footer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/include-partials.js" defer></script>
+  <script src="../js/products-data.js"></script>
+  <script src="../js/main.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      'use strict';
+
+      // Obtener el ID del producto desde la URL (?id=...)
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id') || 'colageno-plus';
+      const product = getProductById(productId);
+
+      if (!product) {
+        document.getElementById('pd-title').textContent = 'Producto no encontrado';
+        document.getElementById('pd-description').textContent = 'Lo sentimos, el producto solicitado no existe en nuestro catálogo.';
+        return;
+      }
+
+      // Actualizar Título de la Página
+      document.title = `${product.name} - Tienda Natural`;
+
+      // Actualizar Breadcrumb
+      document.getElementById('breadcrumb-category').textContent = product.category;
+      document.getElementById('breadcrumb-product').textContent = product.name;
+
+      // Actualizar Información Principal
+      document.getElementById('pd-badge').textContent = product.badge || '100% Natural';
+      document.getElementById('pd-category').textContent = product.category;
+      document.getElementById('pd-title').textContent = product.name;
+      document.getElementById('pd-subtitle').textContent = product.subtitle || '';
+      document.getElementById('pd-price').textContent = product.price;
+      document.getElementById('pd-description').textContent = product.description;
+
+      // Ajustar ruta de imagen según profundidad (si falta ../ lo agrega)
+      let imgPath = product.image;
+      if (!imgPath.startsWith('../') && !imgPath.startsWith('http')) {
+        imgPath = '../' + imgPath;
+      }
+      const imgEl = document.getElementById('pd-image');
+      imgEl.src = imgPath;
+      imgEl.alt = product.name;
+
+      // Renderizar Características
+      const featuresList = document.getElementById('pd-features-list');
+      featuresList.innerHTML = '';
+      (product.features || []).forEach(feat => {
+        const li = document.createElement('li');
+        li.textContent = feat;
+        featuresList.appendChild(li);
+      });
+
+      // Renderizar Ficha Técnica (Specs)
+      const specsTable = document.getElementById('pd-specs-table');
+      specsTable.innerHTML = '';
+      if (product.specs) {
+        Object.entries(product.specs).forEach(([key, val]) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<th>${key}</th><td>${val}</td>`;
+          specsTable.appendChild(tr);
+        });
+      }
+
+      // Renderizar Beneficios
+      const benefitsList = document.getElementById('pd-benefits-list');
+      benefitsList.innerHTML = '';
+      (product.benefits || []).forEach(ben => {
+        const li = document.createElement('li');
+        li.textContent = ben;
+        benefitsList.appendChild(li);
+      });
+
+      // Renderizar Modo de Uso
+      document.getElementById('pd-usage-content').textContent = product.usage || 'Consumir según las indicaciones del envase.';
+
+      // Control de Cantidad (-, +)
+      const qtyInput = document.getElementById('qty-input');
+      document.getElementById('qty-minus').addEventListener('click', () => {
+        let val = parseInt(qtyInput.value, 10) || 1;
+        if (val > 1) qtyInput.value = val - 1;
+      });
+      document.getElementById('qty-plus').addEventListener('click', () => {
+        let val = parseInt(qtyInput.value, 10) || 1;
+        if (val < 99) qtyInput.value = val + 1;
+      });
+
+      // Botón WhatsApp con pedido personalizado
+      const btnWs = document.getElementById('btn-ws-direct');
+      btnWs.addEventListener('click', () => {
+        const qty = parseInt(qtyInput.value, 10) || 1;
+        const msg = `Hola, quisiera pedir ${qty} unidad(es) de *${product.name}* (${product.price} c/u). ¿Tienen disponibilidad?`;
+        const phone = '+51935315393';
+        const url = `https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+
+      // Botón Añadir al Carrito (simulado con feedback)
+      document.getElementById('btn-cart-add').addEventListener('click', () => {
+        const qty = parseInt(qtyInput.value, 10) || 1;
+        alert(`¡Añadido! Se agregaron ${qty} unidad(es) de ${product.name} al carrito.`);
+      });
+
+      // Lógica de Pestañas (Tabs)
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-tab');
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabPanels.forEach(p => p.classList.remove('active'));
+
+          btn.classList.add('active');
+          document.getElementById(target).classList.add('active');
+        });
+      });
+
+      // Renderizar Productos Relacionados
+      const relatedGrid = document.getElementById('related-products-grid');
+      const allProds = Object.values(PRODUCTS_DATA).filter(p => p.id !== product.id);
+      const randomProds = allProds.slice(0, 4); // Tomar 4 productos
+
+      relatedGrid.innerHTML = '';
+      randomProds.forEach(rp => {
+        let rImg = rp.image;
+        if (!rImg.startsWith('../') && !rImg.startsWith('http')) {
+          rImg = '../' + rImg;
+        }
+
+        const link = document.createElement('a');
+        link.href = `producto-detalle.html?id=${rp.id}`;
+        link.className = 'product-card-link';
+        link.innerHTML = `
+          <article class="product-card" style="text-align: center; border: 1px solid #eee; background: #fff; padding: 12px; border-radius: 8px;">
+            <figure class="img-wrap" style="margin: 0; aspect-ratio: 1/1;">
+              <img src="${rImg}" alt="${rp.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+            </figure>
+            <div class="card-body" style="padding-top: 12px;">
+              <h3 style="font-size: 14px; margin-bottom: 8px; color: #111;">${rp.name}</h3>
+              <p class="price" style="color: var(--green, #8dc63f); font-weight: bold; margin-bottom: 10px; font-size: 16px;">${rp.price}</p>
+            </div>
+          </article>
+        `;
+        relatedGrid.appendChild(link);
+      });
+
+      // LÓGICA DE ZOOM INTERACTIVO (Lupa dinámica con seguimiento de cursor)
+      const zoomContainer = document.getElementById('zoom-gallery-container');
+      const zoomImage = document.getElementById('pd-image');
+
+      if (zoomContainer && zoomImage) {
+        zoomContainer.addEventListener('mousemove', function(e) {
+          const rect = zoomContainer.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Porcentajes de posición del cursor dentro del contenedor
+          const xPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          const yPercent = Math.max(0, Math.min(100, (y / rect.height) * 100));
+
+          zoomImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+          zoomImage.style.transform = 'scale(2.35)';
+        });
+
+        zoomContainer.addEventListener('mouseleave', function() {
+          zoomImage.style.transform = 'scale(1)';
+          setTimeout(() => {
+            zoomImage.style.transformOrigin = 'center center';
+          }, 150);
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>

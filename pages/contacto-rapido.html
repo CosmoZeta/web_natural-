@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Contacto Rápido - Del Campo a Tu Casa</title>
+  
+  <meta name="description" content="Atención rápida y asesoría nutricional personalizada vía WhatsApp, llamada o correo.">
+  <link rel="icon" type="image/png" href="../images/logo_natural.png">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    #splash-screen { display: none !important; }
+
+    .quick-contact-wrapper {
+      max-width: 950px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    .quick-hero-title {
+      text-align: center;
+      margin: 30px auto 45px;
+    }
+
+    .quick-pill-banner {
+      display: inline-block;
+      background: var(--green, #8dc63f);
+      color: #fff;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 14px 45px;
+      border-radius: 50px;
+      box-shadow: 0 8px 24px rgba(141, 198, 63, 0.35);
+      text-transform: uppercase;
+    }
+
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .channel-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 30px 25px;
+      text-align: center;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .channel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+      border-color: #dceec9;
+    }
+
+    .channel-icon-circle {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .channel-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .channel-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .btn-channel {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .schedule-box {
+      background: #f9fdf5;
+      border: 1.5px solid #e2f2d4;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .schedule-box h3 {
+      font-size: 18px;
+      color: #222;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .schedule-box p {
+      font-size: 14px;
+      color: #555;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
+    <div class="container">
+      <a href="../index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
+      <span style="color: #666;">Contacto Rápido</span>
+    </div>
+  </div>
+
+  <main class="quick-contact-wrapper">
+    
+    <!-- TÍTULO EN PÍLDORA VERDE -->
+    <div class="quick-hero-title">
+      <div class="quick-pill-banner">Contacto Rápido y Asesoría</div>
+    </div>
+
+    <div class="channels-grid">
+      
+      <!-- CANAL 1: WHATSAPP DIRECTO -->
+      <div class="channel-card">
+        <div>
+          <div class="channel-icon-circle" style="background: #e8f9ee; color: #25D366;">💬</div>
+          <h2 class="channel-title">WhatsApp Directo</h2>
+          <p class="channel-desc">Atención en tiempo real para cotizaciones, dudas nutricionales y pedidos express.</p>
+        </div>
+        <a href="https://wa.me/51935315393?text=Hola,%20quisiera%20asesoría%20sobre%20sus%20productos%20naturales" target="_blank" rel="noopener noreferrer" class="btn-channel" style="background: #25D366; color: #fff;">
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <!-- CANAL 2: LLAMADA TELEFÓNICA -->
+      <div class="channel-card">
+        <div>
+          <div class="channel-icon-circle" style="background: #f0f8e9; color: #8dc63f;">📞</div>
+          <h2 class="channel-title">Central Telefónica</h2>
+          <p class="channel-desc">Comunícate con nuestros asesores comerciales para compras o consultas al instante.</p>
+        </div>
+        <a href="tel:+51935315393" class="btn-channel" style="background: #8dc63f; color: #fff;">
+          Llamar: (+51) 935 315 393
+        </a>
+      </div>
+
+      <!-- CANAL 3: CORREO ELECTRÓNICO -->
+      <div class="channel-card">
+        <div>
+          <div class="channel-icon-circle" style="background: #f4f6fa; color: #333;">✉️</div>
+          <h2 class="channel-title">Correo Corporativo</h2>
+          <p class="channel-desc">Para alianzas comerciales, cotizaciones corporativas o envíos de facturas.</p>
+        </div>
+        <a href="mailto:mfr.asesoresjuridicos@gmail.com" class="btn-channel" style="background: #111; color: #fff;">
+          Enviar un Correo
+        </a>
+      </div>
+
+    </div>
+
+    <!-- HORARIO DE ATENCIÓN -->
+    <div class="schedule-box">
+      <h3>⏰ Horarios de Atención al Cliente</h3>
+      <p><strong>Lunes a Viernes:</strong> 8:00 am – 7:30 pm</p>
+      <p><strong>Sábados:</strong> 8:30 am – 6:00 pm</p>
+      <p><strong>Domingos y Feriados:</strong> Atención por WhatsApp para pedidos programados</p>
+    </div>
+
+  </main>
+
+  <!-- Botones flotantes -->
+  <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
+  <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
+
+  <div id="site-footer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/include-partials.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

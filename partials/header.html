@@ -1,67 +1,410 @@
-<!-- TOPBAR (Franja verde superior) -->
-<div class="topbar" style="background: #8dc63f; color: #fff; padding: 8px 0; font-size: 13px;">
-  <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-    <div class="contact" style="display: flex; gap: 15px; font-weight: 500;">
-      <span>📞 (+51) 967 678 197</span>
-      <span>✉️ contacto@delcampoatucasaperu.com</span>
+<!-- FUENTES GOOGLE FONTS (Montserrat para navegación y Outfit para datos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===================================================
+     ESTILOS DEL HEADER ESTILIZADO (DEL CAMPO A TU CASA)
+     =================================================== */
+  .site-topbar {
+    background: linear-gradient(90deg, #6aa92c 0%, #8dc63f 50%, #76b730 100%);
+    color: #ffffff;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    padding: 8px 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1400;
+  }
+
+  .site-topbar .topbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .topbar-contact {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .topbar-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    opacity: 0.95;
+    transition: all 0.2s ease;
+  }
+
+  .topbar-link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .topbar-btn-shop {
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .topbar-btn-shop:hover {
+    background: #ffffff;
+    color: #6aa92c;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .topbar-cart-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 12.5px;
+  }
+
+  /* BARRA DE NAVEGACIÓN PRINCIPAL STICKY */
+  .site-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 1350;
+    transition: all 0.3s ease;
+  }
+
+  .site-navbar .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    transition: padding 0.3s ease;
+  }
+
+  .site-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center left;
+    z-index: 10;
+  }
+
+  .site-logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    transform-origin: center left;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .site-logo:hover img {
+    transform: scale(1.08);
+  }
+
+  /* EFECTO SCROLL: El logo se agrande (zoom) al hacer scroll hacia abajo y se achica al volver arriba */
+  .site-navbar.scrolled .site-logo img,
+  .site-logo.scrolled img,
+  #site-header.scrolled .site-logo img,
+  body.page-scrolled .site-logo img {
+    height: 72px;
+    transform: scale(1.25);
+    filter: drop-shadow(0 4px 14px rgba(141, 198, 63, 0.45));
+  }
+
+  .site-navbar.scrolled {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+  }
+
+  .site-navbar.scrolled .navbar-inner {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  /* MENÚ PRINCIPAL */
+  .site-nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .site-nav-item {
+    position: relative;
+  }
+
+  .site-nav-link {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    padding: 10px 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    transition: color 0.25s ease;
+  }
+
+  /* Línea animada inferior al hacer hover */
+  .site-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background: #8dc63f;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .site-nav-link:hover::after,
+  .site-nav-item.active .site-nav-link::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav-link:hover {
+    color: #8dc63f !important;
+  }
+
+  .chevron-arrow {
+    font-size: 9px;
+    transition: transform 0.25s ease;
+    display: inline-block;
+    color: #888;
+  }
+
+  .site-nav-item:hover .chevron-arrow {
+    transform: rotate(180deg);
+    color: #8dc63f;
+  }
+
+  /* MENÚ DESPLEGABLE (DROPDOWN) */
+  .dropdown-card {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: -10px;
+    min-width: 235px;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09), 0 4px 10px rgba(0, 0, 0, 0.03);
+    padding: 8px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1500;
+    animation: dropSlideFade 0.22s ease-out forwards;
+  }
+
+  @keyframes dropSlideFade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .site-nav-item:hover .dropdown-card {
+    display: flex;
+  }
+
+  .dropdown-card a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: #333333;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-left: 3.5px solid transparent;
+    transition: all 0.2s ease;
+    display: block;
+  }
+
+  .dropdown-card a:hover {
+    background: #f7fcf2;
+    color: #8dc63f !important;
+    border-left-color: #8dc63f;
+    padding-left: 25px;
+  }
+
+  /* BUSCADOR DE CABECERA */
+  .header-search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .header-search-input {
+    display: none;
+    padding: 8px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 24px;
+    outline: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13.5px;
+    width: 220px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+  }
+
+  .header-search-input:focus {
+    border-color: #8dc63f;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(141, 198, 63, 0.15);
+  }
+
+  .header-search-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f5f6f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .header-search-btn:hover {
+    background: #f0f8e9;
+    color: #8dc63f;
+    border-color: #dceec9;
+    transform: scale(1.06);
+  }
+</style>
+
+<!-- TOPBAR SUPERIOR -->
+<div class="site-topbar">
+  <div class="topbar-container">
+    <div class="topbar-contact">
+      <a href="tel:+51935315393" class="topbar-link" title="Llamar o escribir">
+        <span>📞</span> (+51) 935 315 393
+      </a>
+      <a href="mailto:mfr.asesoresjuridicos@gmail.com" class="topbar-link" title="Enviar correo electrónico">
+        <span>✉️</span> mfr.asesoresjuridicos@gmail.com
+      </a>
     </div>
-    <div class="actions" style="display: flex; gap: 15px; align-items: center; font-weight: 500;">
-      <span>¡COMPRAR AHORA!</span>
-      <span>🛒 <span id="cart-count">0</span> elementos</span>
+    <div class="topbar-actions">
+      <a href="/pages/products.html" class="topbar-btn-shop">
+        <span>✨</span> ¡Comprar Ahora!
+      </a>
+      <div class="topbar-cart-status">
+        <span>🛒</span> <span id="cart-count">0</span> productos
+      </div>
     </div>
   </div>
 </div>
 
-<style>
-  /* Efecto hover: Al pasar el mouse por los enlaces del menú principal cambian a verde */
-  .main-nav a:hover {
-    color: #8dc63f !important;
-    transition: color 0.3s ease;
-  }
-</style>
-
-<!-- HEADER PRINCIPAL -->
-<header class="site-header" style="background: #fff; border-bottom: 1px solid #eee;">
-  <div class="header-inner" style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 10px 20px;">
+<!-- NAVBAR PRINCIPAL -->
+<header class="site-navbar">
+  <div class="navbar-inner">
     
-    <!-- LOGO HEADER: logo_natural_blanco.png -->
-    <a href="/index.html" class="logo" title="Ir a inicio"> 
-      <img src="/images/logo_natural_blanco.png" alt="Del Campo a Tu Casa - Logo" style="height: 65px; width: auto; display: block;"> 
+    <!-- LOGO HEADER -->
+    <a href="/index.html" class="site-logo" title="Ir a la página de inicio"> 
+      <img src="/images/logo_natural_blanco.png" alt="Del Campo a Tu Casa - Logo Natural"> 
     </a>
     
+    <!-- NAVEGACIÓN PRINCIPAL CON ESTILIZADO -->
     <nav class="main-nav">
-      <ul style="display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; align-items: center; font-size: 14px; font-weight: 600;">
-        <li><a href="/index.html" style="text-decoration: none; color: #111;">INICIO</a></li>
-        <li><a href="/nosotros.html" style="text-decoration: none; color: #111;">NOSOTROS</a></li>
+      <ul class="site-nav-menu">
+        <li class="site-nav-item">
+          <a href="/index.html" class="site-nav-link">Inicio</a>
+        </li>
+        <li class="site-nav-item">
+          <a href="/nosotros.html" class="site-nav-link">Nosotros</a>
+        </li>
         
-        <li class="has-dropdown" style="position: relative;">
-          <a href="/pages/products.html" style="text-decoration: none; color: #111;">PRODUCTOS ▾</a>
-          <div class="dropdown-menu">
-            <a href="/pages/colageno.html">COLÁGENO</a>
-            <a href="/pages/citrato-de-magnesio.html">CITRATO DE MAGNESIO</a>
-            <a href="/pages/cloruro-de-magnesio.html">CLORURO DE MAGNESIO</a>
+        <li class="site-nav-item has-dropdown">
+          <a href="/pages/products.html" class="site-nav-link">
+            Productos <span class="chevron-arrow">▼</span>
+          </a>
+          <div class="dropdown-card dropdown-menu">
+            <a href="/pages/colageno.html">Colágeno Hidrolizado</a>
+            <a href="/pages/citrato-de-magnesio.html">Citrato de Magnesio</a>
+            <a href="/pages/cloruro-de-magnesio.html">Cloruro de Magnesio</a>
+            <a href="/pages/products.html">Packs Familiares & Ahorro</a>
+            <a href="/pages/products.html" style="color: var(--green, #8dc63f); border-top: 1px solid #f0f0f0;">Ver Todo el Catálogo ➔</a>
           </div>
         </li>
         
-        <li class="has-dropdown" style="position: relative;">
-          <a href="#" style="text-decoration: none; color: #111;">TE AYUDAMOS ▾</a>
-          <div class="dropdown-menu">
-            <a href="/pages/preguntas-frecuentes.html">PREGUNTAS FRECUENTES</a>
-            <a href="#">CAMBIOS Y DEVOLUCIONES</a>
-            <a href="#">PUNTOS DE VENTA</a>
-            <a href="#">CONTACTO RÁPIDO</a>
+        <li class="site-nav-item has-dropdown">
+          <a href="#" class="site-nav-link">
+            Te Ayudamos <span class="chevron-arrow">▼</span>
+          </a>
+          <div class="dropdown-card dropdown-menu">
+            <a href="/pages/preguntas-frecuentes.html">Preguntas Frecuentes</a>
+            <a href="/pages/cambios-devoluciones.html">Cambios y Devoluciones</a>
+            <a href="/pages/puntos-de-venta.html">Puntos de Venta</a>
+            <a href="/pages/contacto-rapido.html">Contacto Rápido</a>
           </div>
         </li>
         
-        <li><a href="#" style="text-decoration: none; color: #111;">EMPRENDE</a></li>
-        <li><a href="/pages/blog.html" style="text-decoration: none; color: #111;">BLOG</a></li>
-        <li><a href="/pages/contacto.html" style="text-decoration: none; color: #111;">CONTACTO</a></li>
+        <li class="site-nav-item">
+          <a href="/pages/emprende.html" class="site-nav-link">Emprende</a>
+        </li>
+        <li class="site-nav-item">
+          <a href="/pages/blog.html" class="site-nav-link">Blog</a>
+        </li>
+        <li class="site-nav-item">
+          <a href="/pages/contacto.html" class="site-nav-link">Contacto</a>
+        </li>
       </ul>
     </nav>
     
-        <div class="search-container" style="display: flex; align-items: center; gap: 10px; position: relative;">
-      <input type="text" id="header-search-input" placeholder="Buscar productos..." style="display: none; padding: 6px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 14px; width: 200px;">
-      <div class="search" id="search-trigger" style="cursor: pointer; font-size: 18px; color: #111;">🔍</div>
+    <!-- BUSCADOR -->
+    <div class="header-search-wrapper search-container">
+      <input type="text" id="header-search-input" class="header-search-input" placeholder="Buscar productos..." aria-label="Buscar productos">
+      <div class="header-search-btn search" id="search-trigger" title="Buscar en el catálogo" role="button" aria-label="Abrir buscador">🔍</div>
     </div>
+
   </div>
 </header>

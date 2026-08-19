@@ -3,96 +3,593 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Blog - Del Campo a Tu Casa</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Blog de Salud & Nutrición - Del Campo a Tu Casa</title>
   
-  <meta name="description" content="Lee nuestros artículos sobre snacks saludables, alimentación natural y consejos de nutrición para toda la familia.">
-  
-  <!-- Hoja de estilos con la ruta relativa para la carpeta pages -->
+  <meta name="description" content="Artículos, guías científicas y consejos sobre colágeno hidrolizado, citrato de magnesio, superfoods y alimentación consciente.">
+  <link rel="icon" type="image/png" href="../images/logo_natural.png">
   <link rel="stylesheet" href="../css/styles.css">
 
-  <!-- ESTO OCULTARÁ EL SPLASH SCREEN INMEDIATAMENTE EN ESTA PÁGINA -->
   <style>
-    #splash-screen {
-      display: none !important;
+    #splash-screen { display: none !important; }
+
+    .blog-page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto 70px;
+      padding: 0 20px;
+    }
+
+    /* Encabezado Principal */
+    .blog-hero-header {
+      text-align: center;
+      margin: 25px auto 40px;
+    }
+
+    .blog-pill-title {
+      display: inline-block;
+      background: var(--green, #8dc63f);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 14px 50px;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(141, 198, 63, 0.35);
+      text-transform: uppercase;
+    }
+
+    .blog-hero-subtitle {
+      font-size: 15.5px;
+      color: #666;
+      margin-top: 14px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Layout Blog 2 Columnas */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 950px) {
+      .blog-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Grid de Artículos */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .blog-post-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      height: 100%;
+    }
+
+    .blog-post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+      border-color: var(--green, #8dc63f);
+    }
+
+    .blog-img-container {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #f7f7f7;
+    }
+
+    .blog-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .blog-post-card:hover .blog-img-container img {
+      transform: scale(1.08);
+    }
+
+    .blog-category-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(17, 17, 17, 0.85);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+    }
+
+    .blog-category-tag.green {
+      background: var(--green, #8dc63f);
+    }
+
+    .blog-card-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .blog-meta-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .blog-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .blog-post-card:hover .blog-title {
+      color: #6aa92c;
+    }
+
+    .blog-excerpt {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    /* Fila de enlace de lectura */
+    .blog-actions-row {
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+      margin-top: auto;
+    }
+
+    .btn-source-link {
+      background: #f7fbf2;
+      color: #558c1c;
+      border: 1.5px solid #d8ecc3;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+
+    .btn-source-link:hover {
+      background: var(--green, #8dc63f);
+      color: #ffffff;
+      border-color: var(--green, #8dc63f);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(141, 198, 63, 0.3);
+    }
+
+    /* Sidebar del Blog */
+    .blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      position: sticky;
+      top: 130px;
+    }
+
+    .sidebar-card-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid #eef2eb;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .sidebar-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .popular-post-item {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease;
+    }
+
+    .popular-post-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .popular-post-item:hover {
+      transform: translateX(4px);
+    }
+
+    .popular-post-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #f0f0f0;
+    }
+
+    .popular-post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .popular-post-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #222;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .popular-post-date {
+      font-size: 11px;
+      color: #888;
+    }
+
+    /* Caja de Boletín / Asesoría */
+    .newsletter-card {
+      background: linear-gradient(135deg, #111111 0%, #1c2715 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .newsletter-card h4 {
+      font-size: 17px;
+      color: #8dc63f;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .newsletter-card p {
+      font-size: 13px;
+      color: #ccc;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .btn-ws-newsletter {
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .btn-ws-newsletter:hover {
+      background: #20bd5a;
     }
   </style>
 </head>
 <body>
-  
-  <!-- EL HEADER SE CARGARÁ AUTOMÁTICAMENTE AQUÍ DESDE EL ARCHIVO PARCIAL -->
   <div id="site-header"></div>
 
   <!-- Breadcrumb -->
   <div class="breadcrumb" style="text-align: center; margin-top: 20px;">
     <div class="container">
-      <span style="color: var(--green); font-weight: bold;">Inicio</span> / <span>Blog</span>
+      <a href="../index.html" style="color: var(--green); font-weight: bold; text-decoration: none;">Inicio</a> / 
+      <span style="color: #666;">Blog de Salud & Nutrición</span>
     </div>
   </div>
 
-  <!-- Contenido Principal del Blog (Diseño de 2 columnas similar a la tienda) -->
-  <main class="container" style="margin-bottom: 60px;">
-    <div class="store-layout" style="align-items: flex-start;">
+  <main class="blog-page-wrapper">
+    
+    <!-- ENCABEZADO CON PÍLDORA VERDE -->
+    <div class="blog-hero-header">
+      <div class="blog-pill-title">Blog & Consejos Naturales</div>
+      <p class="blog-hero-subtitle">Descubre guías científicas, artículos médicos oficiales y secretos nutricionales para potenciar tu energía, articulaciones y bienestar.</p>
+    </div>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="blog-layout">
       
-      <!-- COLUMNA IZQUIERDA: LISTA DE ARTÍCULOS DE BLOG -->
-      <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+      <!-- COLUMNA IZQUIERDA: ARTÍCULOS DE BLOG CON ENLACES REALES -->
+      <div class="blog-grid">
         
-        <!-- ARTÍCULO 1 -->
-        <article class="product-card" style="text-align: left; border: 1px solid #eee; background: #fff;">
-          <figure class="img-wrap" style="margin: 0; aspect-ratio: 16/9;">
-            <img src="../images/colagen_producto2.png" alt="Ideas de snacks para niños" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-          </figure>
-          <div class="card-body" style="align-items: flex-start; padding: 16px;">
-            <h3 style="font-size: 16px; line-height: 1.3; margin-bottom: 8px; color: #111;">
-              👶 IDEAS DE SNACKS PARA NIÑOS: ¿CÓMO ELEGIR UNO REALMENTE SALUDABLE?
-            </h3>
-            <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">
-              por Del Campo a tu Casa Perú | Dic 12, 2025 |
-            </p>
-            <p style="font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 14px;">
-              Sabemos que los niños aman los snacks. Pero también sabemos que no cualquier snack es una buena opción. En un mundo lleno de cajitas coloridas...
-            </p>
-            <a href="#" style="color: var(--green); font-weight: 700; font-size: 13px; text-decoration: none;">leer más</a>
+        <!-- ARTÍCULO 1: SEÑALES DE FALTA DE COLÁGENO -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag green">Colágeno & Piel</span>
+              <img src="../images/colageno_manzana.jpg" alt="5 Señales de que tu cuerpo necesita Colágeno" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 15 Ago, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 4 min de lectura</span>
+                </div>
+                <h2 class="blog-title">5 Señales de que tu cuerpo te pide Colágeno Hidrolizado (y cómo tomarlo)</h2>
+                <p class="blog-excerpt">A partir de los 25 años la síntesis natural de colágeno disminuye. Conoce los síntomas en articulaciones, piel y cabello, y el respaldo científico sobre su absorción.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://www.healthline.com/nutrition/collagen-benefits" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Leer estudio en Healthline">
+                  <span>📖 Leer Estudio Científico</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
           </div>
         </article>
 
-        <!-- ARTÍCULO 2 -->
-        <article class="product-card" style="text-align: left; border: 1px solid #eee; background: #fff;">
-          <figure class="img-wrap" style="margin: 0; aspect-ratio: 16/9;">
-            <img src="../images/citrato_magnesio2.png" alt="Harina de almendras beneficios" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-          </figure>
-          <div class="card-body" style="align-items: flex-start; padding: 16px;">
-            <h3 style="font-size: 16px; line-height: 1.3; margin-bottom: 8px; color: #111;">
-              🌰 HARINA DE ALMENDRAS: UN INGREDIENTE REAL CON MUCHOS BENEFICIOS
-            </h3>
-            <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">
-              por Del Campo a tu Casa Perú | Sep 25, 2025 |
-            </p>
-            <p style="font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 14px;">
-              ¿Qué es la harina de almendras y por qué es tan especial? La harina de almendras se obtiene simplemente al moler almendras crudas...
-            </p>
-            <a href="#" style="color: var(--green); font-weight: 700; font-size: 13px; text-decoration: none;">leer más</a>
+        <!-- ARTÍCULO 2: CITRATO VS CLORURO -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag">Magnesio Puro</span>
+              <img src="../images/citrato_magnesio2.png" alt="Citrato vs Cloruro de Magnesio diferencias" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 10 Ago, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 5 min de lectura</span>
+                </div>
+                <h2 class="blog-title">Citrato vs. Cloruro de Magnesio: ¿Cuál es el ideal según tus objetivos?</h2>
+                <p class="blog-excerpt">¿Calambres musculares o salud digestiva y descanso? Comparamos la biodisponibilidad y las funciones terapéuticas de las diferentes sales de magnesio según el NIH.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://ods.od.nih.gov/factsheets/Magnesium-DatosEnEspanol/" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Ver ficha en NIH">
+                  <span>🏛️ Ficha Médica Oficial (NIH)</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 3: SUEÑO Y DESCANSO REPARADOR -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag">Estilo de Vida</span>
+              <img src="../images/citrato_magnesio.png" alt="Magnesio para dormir profundo" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 02 Ago, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 3 min de lectura</span>
+                </div>
+                <h2 class="blog-title">El Secreto del Magnesio para apagar el estrés nocturno y despertar renovado</h2>
+                <p class="blog-excerpt">El magnesio interviene en más de 300 reacciones bioquímicas y favorece la relajación muscular evitando los despertares nocturnos y la fatiga diurna.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://medlineplus.gov/spanish/ency/article/002423.htm" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Leer guía en MedlinePlus">
+                  <span>📚 Guía en MedlinePlus</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 4: COLÁGENO CON VITAMINA C -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag green">Nutrición & Ciencia</span>
+              <img src="../images/caja_colageno_manzana.jpg" alt="Por qué tomar colágeno con Vitamina C" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 26 Jul, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 4 min de lectura</span>
+                </div>
+                <h2 class="blog-title">Por qué tomar Colágeno junto con Vitamina C triplica su absorción celular</h2>
+                <p class="blog-excerpt">La vitamina C actúa como cofactor indispensable en la hidroxilación de la prolina y lisina para fijar la estructura de triple hélice del colágeno en el organismo.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://ods.od.nih.gov/factsheets/VitaminC-DatosEnEspanol/" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Ver estudio en NIH">
+                  <span>🧪 Respaldo Científico (NIH)</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 5: SALUD ARTICULAR Y DEPORTE -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag">Salud Articular</span>
+              <img src="../images/cloruro_magnesio1.png" alt="Cuidado articular para deportistas" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 18 Jul, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 4 min de lectura</span>
+                </div>
+                <h2 class="blog-title">Guía Articular: Cómo proteger cartílagos y tendones frente al desgaste físico</h2>
+                <p class="blog-excerpt">Consejos médicos para prevenir el desgaste de cartílago en rodillas, hombros y columna mediante nutrición celular, colágeno hidrolizado y minerales esenciales.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://medlineplus.gov/spanish/jointdisorders.html" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Leer en MedlinePlus">
+                  <span>🏥 Salud Articular (MedlinePlus)</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 6: RECETA DE SMOOTHIE SALUDABLE -->
+        <article class="blog-post-card">
+          <div>
+            <div class="blog-img-container">
+              <span class="blog-category-tag green">Recetas Naturales</span>
+              <img src="../images/colageno_fresa.jpg" alt="Smoothies saludables con colágeno" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+              <div>
+                <div class="blog-meta-info">
+                  <span>📅 08 Jul, 2026</span>
+                  <span>•</span>
+                  <span>⏱️ 3 min de lectura</span>
+                </div>
+                <h2 class="blog-title">3 Smoothies Deliciosos y Rejuvenecedores con Colágeno de Fresa y Frutos Rojos</h2>
+                <p class="blog-excerpt">Aprende a preparar batidos ricos en antioxidantes, polifenoles y fibra para tus mañanas: combaten los radicales libres y retrasan el envejecimiento celular.</p>
+              </div>
+
+              <div class="blog-actions-row">
+                <a href="https://medlineplus.gov/spanish/antioxidants.html" target="_blank" rel="noopener noreferrer" class="btn-source-link" title="Guía de Antioxidantes">
+                  <span>🍓 Poder de los Antioxidantes</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
           </div>
         </article>
 
       </div>
 
-      <!-- COLUMNA DERECHA: SIDEBAR DE CARRITO -->
-      <aside class="sidebar" style="background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 6px; width: 280px;">
-        <h4 style="font-size: 15px; letter-spacing: 1px; margin-bottom: 16px; border-bottom: 1px solid #eee; padding-bottom: 8px; color: #111;">CARRITO</h4>
-        <p style="font-size: 13px; color: var(--muted); line-height: 1.4;">No hay productos en el carrito.</p>
+      <!-- COLUMNA DERECHA: SIDEBAR DE NOTICIAS Y ASESORÍA -->
+      <aside class="blog-sidebar">
+        
+        <!-- ARTÍCULOS POPULARES -->
+        <div class="sidebar-card-box">
+          <div class="sidebar-title">🔥 Más Leídos</div>
+          
+          <a href="https://www.healthline.com/nutrition/collagen-benefits" target="_blank" rel="noopener noreferrer" class="popular-post-item">
+            <div class="popular-post-thumb">
+              <img src="../images/colageno_manzana.jpg" alt="Colágeno Manzana" loading="lazy">
+            </div>
+            <div>
+              <div class="popular-post-title">5 Señales de que te falta Colágeno</div>
+              <div class="popular-post-date">15 Ago, 2026 • Healthline</div>
+            </div>
+          </a>
+
+          <a href="https://ods.od.nih.gov/factsheets/Magnesium-DatosEnEspanol/" target="_blank" rel="noopener noreferrer" class="popular-post-item">
+            <div class="popular-post-thumb">
+              <img src="../images/citrato_magnesio2.png" alt="Citrato vs Cloruro" loading="lazy">
+            </div>
+            <div>
+              <div class="popular-post-title">Citrato vs. Cloruro: Guía NIH</div>
+              <div class="popular-post-date">10 Ago, 2026 • NIH Oficial</div>
+            </div>
+          </a>
+
+          <a href="https://medlineplus.gov/spanish/ency/article/002423.htm" target="_blank" rel="noopener noreferrer" class="popular-post-item">
+            <div class="popular-post-thumb">
+              <img src="../images/colagen_producto4.png" alt="Pack Familiar" loading="lazy">
+            </div>
+            <div>
+              <div class="popular-post-title">El Magnesio en la Dieta y Relax</div>
+              <div class="popular-post-date">02 Ago, 2026 • MedlinePlus</div>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- CATEGORÍAS TEMÁTICAS -->
+        <div class="sidebar-card-box">
+          <div class="sidebar-title">🏷️ Categorías de Tienda</div>
+          <ul class="filter-pills-list" style="margin-bottom: 0;">
+            <li class="filter-pill-item"><a href="colageno.html"><span>Colágeno & Piel</span> <span class="pill-badge">9</span></a></li>
+            <li class="filter-pill-item"><a href="citrato-de-magnesio.html"><span>Citrato de Magnesio</span> <span class="pill-badge">6</span></a></li>
+            <li class="filter-pill-item"><a href="cloruro-de-magnesio.html"><span>Cloruro de Magnesio</span> <span class="pill-badge">6</span></a></li>
+            <li class="filter-pill-item"><a href="products.html"><span>Ver Todo el Catálogo</span> <span class="pill-badge">18</span></a></li>
+          </ul>
+        </div>
+
+        <!-- CAJA DE ASESORÍA GRATUITA POR WHATSAPP -->
+        <div class="newsletter-card">
+          <h4>💬 ¿Dudas sobre tu suplementación?</h4>
+          <p>Nuestros asesores nutricionales te orientan gratis para armar tu rutina diaria según tus objetivos.</p>
+          <a href="https://wa.me/51935315393?text=Hola,%20quisiera%20asesoría%20nutricional%20gratuita" target="_blank" rel="noopener noreferrer" class="btn-ws-newsletter">
+            Escribir por WhatsApp
+          </a>
+        </div>
+
       </aside>
 
     </div>
+
   </main>
 
   <!-- Botones flotantes -->
   <button id="whatsapp-btn" aria-label="Contactar por WhatsApp">💬</button>
   <button id="cart-btn" aria-label="Ver carrito">🛒<span id="cart-bubble">0</span></button>
 
-  <!-- EL FOOTER SE CARGARÁ AUTOMÁTICAMENTE AQUÍ DESDE EL ARCHIVO PARCIAL -->
   <div id="site-footer"></div>
 
-  <!-- SCRIPTS NECESARIOS PARA CARGAR HEADER, FOOTER Y FUNCIONALIDADES -->
+  <!-- SCRIPTS -->
   <script src="../js/include-partials.js" defer></script>
   <script src="../js/main.js" defer></script>
 </body>
