@@ -868,14 +868,15 @@ body.page-scrolled .logo img {
 
 /* Tablets en horizontal y escritorios pequeños */
 @media (max-width: 1024px) {
-  .store-layout {
+  .store-layout,
+  .catalog-layout {
     grid-template-columns: 240px 1fr;
     gap: 25px;
   }
   .catalog-grid,
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -886,195 +887,358 @@ body.page-scrolled .logo img {
 /* Tablets en vertical y Celulares (<= 768px) */
 @media (max-width: 768px) {
   /* Layout de Tienda en Columna */
-  .store-layout {
+  .store-layout,
+  .catalog-layout {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
   }
 
-  .sidebar {
+  .sidebar,
+  .catalog-sidebar {
     width: 100%;
     position: static;
+    padding: 16px;
+    border-radius: 16px;
   }
 
   .sidebar-filter-box {
-    padding: 18px;
+    padding: 0;
   }
 
   .filter-pills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .filter-pill-item {
+    margin: 0;
   }
 
   .filter-pill-item a {
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 6px 12px;
+    font-size: 11.5px;
+    border-radius: 10px;
+  }
+
+  .sidebar-guarantee-card {
+    display: none; /* Ocultar en móvil para ahorrar espacio */
+  }
+
+  .catalog-controls {
+    padding: 10px 14px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+  }
+
+  .results-count-text {
+    font-size: 12px;
+  }
+
+  .sort-wrapper select {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 
   /* Cuadrícula de Productos en 2 Columnas Móvil */
   .catalog-grid,
-  .products-grid {
+  .products-grid,
+  .store-grid-wrapper,
+  #products-grid {
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 14px !important;
+    gap: 10px !important;
+    padding: 0 2px !important;
   }
 
   .store-product-card,
-  .product-card {
-    border-radius: 14px;
+  .product-card,
+  .small-product-card {
+    padding: 10px 8px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
   }
 
   .card-image-box,
-  .product-card .img-wrap {
-    aspect-ratio: 1/1;
+  .product-card .img-wrap,
+  .small-product-card .img-wrap {
+    aspect-ratio: 1/1 !important;
+    margin-bottom: 6px !important;
+    border-radius: 8px !important;
   }
 
   .card-title,
-  .product-card h3 {
-    font-size: 13px !important;
-    min-height: 36px;
-    margin-bottom: 6px;
+  .product-card h3,
+  .small-product-card h3,
+  .store-product-card h3 {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    margin-bottom: 4px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .card-price,
-  .product-card .price {
-    font-size: 16px !important;
+  .product-card .price,
+  .small-product-card .price {
+    font-size: 14.5px !important;
+    margin-bottom: 6px !important;
+    font-weight: 800 !important;
   }
 
   .card-btn-view,
   .btn-card-view {
-    padding: 8px 10px;
-    font-size: 12px;
+    padding: 6px 4px !important;
+    font-size: 10.5px !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
   }
 
   .card-promo-badge,
   .card-badge {
-    font-size: 9.5px;
-    padding: 3px 8px;
+    top: 6px !important;
+    left: 6px !important;
+    font-size: 8.5px !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
   }
 
   /* Carrusel Hero Móvil */
   .hero-carousel {
-    height: clamp(340px, 48vh, 440px) !important;
+    height: clamp(320px, 46vh, 420px) !important;
   }
 
   .hero-content {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .hero-content h1 {
-    font-size: 24px !important;
+    font-size: 20px !important;
     line-height: 1.25 !important;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .hero-content p {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 16px;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 12px;
+  }
+
+  .hero-badge {
+    font-size: 10px !important;
+    padding: 3px 10px !important;
+    margin-bottom: 8px;
   }
 
   .hero-buttons {
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
+    flex-direction: row !important;
+    gap: 8px !important;
+    justify-content: flex-start !important;
   }
 
   .hero-btn-primary,
   .hero-btn-secondary {
-    padding: 10px 18px;
-    font-size: 13px;
+    padding: 8px 14px !important;
+    font-size: 11.5px !important;
+    border-radius: 20px !important;
     text-align: center;
   }
 
   .carousel-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 16px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
   }
-  #prevBtn { left: 10px; }
-  #nextBtn { right: 10px; }
+  #prevBtn { left: 8px; }
+  #nextBtn { right: 8px; }
+
+  /* Videos Móvil: Carrusel Swipe Horizontal */
+  .home-videos-section {
+    margin: 25px auto 15px !important;
+    padding: 0 12px !important;
+  }
+
+  .videos-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 12px !important;
+    padding: 4px 4px 12px !important;
+    margin-top: 10px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .videos-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .video-card {
+    flex: 0 0 205px !important;
+    max-width: 205px !important;
+    scroll-snap-align: center !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07) !important;
+  }
+
+  .video-player-box {
+    aspect-ratio: 9/13 !important;
+    max-height: 220px !important;
+  }
+
+  .video-badge-tag {
+    top: 8px !important;
+    left: 8px !important;
+    font-size: 9px !important;
+    padding: 3px 8px !important;
+  }
+
+  .video-card-body {
+    padding: 8px 10px !important;
+  }
+
+  .video-card-title {
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .video-card-desc {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+  }
+
+  .videos-swipe-hint {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green, #8dc63f);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
   /* Cinta de Confianza 2x2 */
   .trust-ribbon {
-    padding: 18px 0;
+    padding: 16px 0;
   }
 
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    padding: 0 14px;
+    gap: 10px;
+    padding: 0 10px;
   }
 
   .trust-card {
-    gap: 10px;
+    gap: 8px;
+    padding: 8px;
   }
 
   .trust-icon-box {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
   }
 
   .trust-title {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .trust-desc {
-    font-size: 11px;
+    font-size: 10.5px;
   }
 
   /* Especialidades por Categoría */
   .category-cards-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
 
   .category-box {
-    padding: 14px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .category-thumb {
+    width: 65px;
+    height: 65px;
+  }
+
+  .category-info h3 {
+    font-size: 15px;
+  }
+
+  .category-info p {
+    font-size: 12px;
   }
 
   /* Testimonios y Banner Mayorista */
   .testimonials-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
   }
 
   .home-wholesale-banner {
-    padding: 32px 20px;
-    margin: 0 14px 40px;
-    border-radius: 18px;
+    padding: 26px 16px;
+    margin: 0 10px 35px;
+    border-radius: 16px;
   }
 
   .home-wholesale-banner h2 {
-    font-size: 22px;
+    font-size: 19px;
   }
 
   .home-wholesale-banner p {
-    font-size: 13.5px;
+    font-size: 12.5px;
+    margin-bottom: 18px;
   }
 
   /* Footer en Móvil */
   .footer-inner {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 28px;
-    padding: 36px 0;
+    gap: 24px;
+    padding: 30px 0;
   }
 
   .footer-about .footer-logo {
-    margin: 0 auto 14px;
+    margin: 0 auto 12px;
   }
 
   /* Títulos de sección en píldora */
-  .section-pill-title {
-    font-size: 20px !important;
-    padding: 9px 28px !important;
+  .section-pill-header {
+    margin: 25px auto 15px !important;
   }
 
-  .section-subtitle {
-    font-size: 13px;
-    padding: 0 10px;
+  .section-pill-title,
+  .about-pill-title,
+  .catalog-hero-header h1,
+  .blog-hero-header h1 {
+    font-size: 16px !important;
+    padding: 7px 22px !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 30px !important;
+  }
+
+  .section-subtitle,
+  .about-hero-subtitle,
+  .catalog-hero-header p,
+  .blog-hero-header p {
+    font-size: 12px !important;
+    margin-top: 5px !important;
+    padding: 0 10px !important;
+    line-height: 1.4 !important;
   }
 }
 
@@ -1082,27 +1246,29 @@ body.page-scrolled .logo img {
 @media (max-width: 480px) {
   .trust-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .catalog-grid,
-  .products-grid {
-    gap: 10px !important;
+  .products-grid,
+  .store-grid-wrapper,
+  #products-grid {
+    gap: 8px !important;
   }
 
   #whatsapp-btn {
-    bottom: 16px;
-    left: 14px;
-    width: 48px;
-    height: 48px;
-    font-size: 22px;
+    bottom: 14px;
+    left: 12px;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
   }
 
   #cart-btn {
-    bottom: 16px;
-    right: 14px;
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
+    bottom: 14px;
+    right: 12px;
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
   }
 }
